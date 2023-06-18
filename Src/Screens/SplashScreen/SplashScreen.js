@@ -25,7 +25,7 @@ const SplashScreen = (props) => {
             <NativeBaseProvider>
                 <Center w="100%">
                     <Box w="90%" maxW="400">
-                        <Progress value={50} mx="5"/>
+                        <Progress size="xs" mb={4} value={40} colorScheme="secondary"/>
                     </Box>
                 </Center>
             </NativeBaseProvider>

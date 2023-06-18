@@ -192,7 +192,7 @@ const Personality = (props) => {
                     borderWidth={wp(0.5)}
                     alignSelf={'center'}
                     top={wp(5)}
-                    onPress={() => { props.navigation.navigate('LoginScreen') }}
+                    onPress={() => { props.navigation.navigate('Hobbies') }}
                 />
             </View>
 

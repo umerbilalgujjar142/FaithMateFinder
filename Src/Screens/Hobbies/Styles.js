@@ -20,5 +20,25 @@ textStyle:{
     fontSize: wp(7), 
     color: Assets.ic_primaryColor
 },
+
+
+////////
+titleText: {
+    padding: 8,
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  headingText: {
+    padding: 8,
+  },
+  describeText: {
+    color: '#8C8C8C', top: wp(2)  
+},
+itemText:{
+    color: Assets.ic_Balck,
+     fontSize: wp(4.5),
+      marginTop: wp(5)
+}
 })
 export default styles;
