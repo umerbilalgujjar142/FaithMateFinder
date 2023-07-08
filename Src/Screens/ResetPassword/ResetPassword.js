@@ -9,6 +9,7 @@ import Assets from '../../Assets/Assets';
 import Styles from './Styles'
 import InputComponent from '../../GlobalComponent/InputComponent/InputComponent'
 import ButtonComponent from '../../GlobalComponent/ButtonComponent/ButtonComponent';
+import LinearGradientBtn from '../../GlobalComponent/ButtonComponent/LinearGradientBtn';
 
 
 const ResetPassword = (props) => {
@@ -31,7 +32,7 @@ const ResetPassword = (props) => {
                 backgroundColor={'#fff'}
                 borderColor={Assets.ic_primaryColor}
                 borderRadius={wp(5)}
-                borderWidth={wp(0.5)}
+                borderWidth={wp(0.4)}
                 paddingLeft={wp(5)}
                 marginTop={wp(5)}
                 alignSelf={'center'}
@@ -42,29 +43,18 @@ const ResetPassword = (props) => {
                 value={''}
             />
             {/* for button */}
-            <ButtonComponent
-                    width={wp(90)}    
-                    height={hp(7)}
-                    backgroundColor={Assets.ic_Balck}
-                    borderRadius={wp(5)}
-                    borderWidth={wp(0.5)}
-                    paddingLeft={wp(5)}
-                    marginTop={wp(5)}
-                    alignSelf={'center'}
-                    textColor={'#fff'}
-                    text={'Submit'}
-                    onPress={() => props.navigation.navigate('EnterOTP')}
+
+
+            <LinearGradientBtn
+                   width={wp(90)}    
+                   height={hp(7)}
+                   borderRadius={wp(10)}
+                   marginTop={wp(5)}
+                   alignSelf={'center'}
+                   textColor={'#fff'}
+                   text={'Submit'}
+                   onPress={() => props.navigation.navigate('EnterOTP')}
                 />
-
-
-
-
-
-
-
-
-
-
 
         </View>
     )

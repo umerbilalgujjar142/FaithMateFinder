@@ -7,12 +7,13 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
 import Styles from './Styles'
-
 const OTPComponent = (props) => {   
 return (
-    <View style={{ paddingHorizontal: wp(4), marginTop: hp(5), flexDirection: 'row', justifyContent: 'center' }}>
+    <View style={Styles.ViewMainOTP}>
+   
     <TextInput
-        style={{ height: hp(7), width: wp(10), textAlign: 'center', fontSize: wp(4), borderRadius: wp(4), borderWidth: wp(0.6), borderColor: Assets.ic_primaryColor, marginRight: wp(4), borderColor: 'gray', borderWidth: 1 }}
+        style={Styles.otpComponwetn
+        }
         placeholder='1'
         keyboardType='numeric'
         maxLength={1}
@@ -20,7 +21,7 @@ return (
     />
 
     <TextInput
-        style={{ height: hp(7), width: wp(10), textAlign: 'center', fontSize: wp(4), borderRadius: wp(4), borderWidth: wp(0.6), borderColor: Assets.ic_primaryColor, marginRight: wp(4), borderColor: 'gray', borderWidth: 1 }}
+        style={Styles.otpComponwetn}
         placeholder='2'
         keyboardType='numeric'
         maxLength={1}
@@ -28,7 +29,7 @@ return (
     />
 
     <TextInput
-        style={{ height: hp(7), width: wp(10), textAlign: 'center', fontSize: wp(4), borderRadius: wp(4), borderWidth: wp(0.6), borderColor: Assets.ic_primaryColor, marginRight: wp(4), borderColor: 'gray', borderWidth: 1 }}
+        style={Styles.otpComponwetn}
         placeholder='3'
         keyboardType='numeric'
         maxLength={1}
@@ -36,7 +37,7 @@ return (
     />
 
     <TextInput
-        style={{ height: hp(7), width: wp(10), textAlign: 'center', fontSize: wp(4), borderRadius: wp(4), borderWidth: wp(0.6), borderColor: Assets.ic_primaryColor, borderColor: 'gray', marginRight: wp(4), borderWidth: 1 }}
+        style={Styles.otpComponwetn}
         placeholder='4'
         keyboardType='numeric'
         maxLength={1}
@@ -44,7 +45,7 @@ return (
     />
 
     <TextInput
-        style={{ height: hp(7), width: wp(10), textAlign: 'center', fontSize: wp(4), borderRadius: wp(4), borderWidth: wp(0.6), marginRight: wp(4), borderColor: Assets.ic_primaryColor, borderColor: 'gray', borderWidth: 1 }}
+        style={Styles.otpComponwetn}
         placeholder='5'
         keyboardType='numeric'
         maxLength={1}

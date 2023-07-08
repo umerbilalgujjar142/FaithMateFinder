@@ -191,6 +191,7 @@ const Hobbies = (props) => {
 
             <SectionedMultiSelect
                 items={Items}
+                showCancelButton={true}
                 IconRenderer={Icon}
                 color={Assets.ic_secondaryColor}
                 subText={Assets.ic_secondaryColor}
@@ -204,7 +205,7 @@ const Hobbies = (props) => {
                 selectedItems={selectedItems}
             />
 
-            <Text style={Styles.itemText}>What do you do for fun</Text>
+            <Text style={Styles.itemText}>What Foods do you like most?</Text>
 
 
             <SectionedMultiSelect
@@ -212,7 +213,7 @@ const Hobbies = (props) => {
                 IconRenderer={Icon}
                 uniqueKey="id"
                 subKey="children"
-                selectText="Choose hobbies..."
+                selectText="Choose Foods..."
                 showDropDowns={true}
                 onSelectedItemsChange={onSelectedItemsChange}
                 selectedItems={selectedItems}
@@ -225,7 +226,7 @@ const Hobbies = (props) => {
                 IconRenderer={Icon}
                 uniqueKey="id"
                 subKey="children"
-                selectText="Choose hobbies..."
+                selectText="Choose Movies..."
                 showDropDowns={true}
                 onSelectedItemsChange={onSelectedItemsChange}
                 selectedItems={selectedItems}

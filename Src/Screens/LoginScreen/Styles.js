@@ -25,7 +25,7 @@ toucableForget:{
     flexDirection: 'row', justifyContent: 'flex-end', marginTop: wp(2), paddingHorizontal: wp(5)
 },
 signUpText:{
-    color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(4)
+    color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(4.2)
 },
 doesntHave:{
     flexDirection: 'row', justifyContent: 'center', marginTop: wp(2), paddingHorizontal: wp(5)

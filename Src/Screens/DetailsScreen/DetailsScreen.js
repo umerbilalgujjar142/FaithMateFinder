@@ -8,6 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Assets from '../../Assets/Assets';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Styles from './Styles'
+import LinearGradientBtn from '../../GlobalComponent/ButtonComponent/LinearGradientBtn';
 
 const DetailsScreen = (props) => {
 
@@ -27,6 +28,7 @@ const DetailsScreen = (props) => {
                 <Text style={{ color: '#8C8C8C' }}>Faith Mate Finder match-making boutique has a unique business model, different from what you see in the industry. What sets us apart from your typical online dating service is our service offerings and the quality of our connections.</Text>
             </View>
 
+        
 
 
             <TouchableOpacity onPress={()=>props.navigation.navigate('LoginScreen')} style={Styles.toucableLogin}>

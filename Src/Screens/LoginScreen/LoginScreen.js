@@ -32,7 +32,7 @@ const LoginScreen = (props) => {
                     backgroundColor={'#fff'}
                     borderColor={Assets.ic_primaryColor}
                     borderRadius={wp(5)}
-                    borderWidth={wp(0.5)}
+                    borderWidth={wp(0.4)}
                     paddingLeft={wp(5)}
                     marginTop={wp(5)}
                     alignSelf={'center'}
@@ -49,7 +49,7 @@ const LoginScreen = (props) => {
                     backgroundColor={'#fff'}
                     borderColor={Assets.ic_primaryColor}
                     borderRadius={wp(5)}
-                    borderWidth={wp(0.5)}
+                    borderWidth={wp(0.4)}
                     paddingLeft={wp(5)}
                     marginTop={wp(5)}
                     alignSelf={'center'}

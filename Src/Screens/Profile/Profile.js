@@ -17,10 +17,10 @@ const Profile = (props) => {
         <View style={Styles.conatainer}>
             <Text style={{ top: wp(10), fontSize: wp(5), paddingHorizontal: wp(5), color: Assets.ic_Balck, fontWeight: 'bold' }}>Set Profile</Text>
 
-            {/* make view for set the profile image rounded bordr shadow and border color add camera icons also*/}
+           
             <View style={{ top: wp(15), justifyContent: 'center', alignItems: 'center' }}>
-                <Image source={Assets.ic_logo} style={{ width: wp(30), height: wp(27), borderRadius: wp(15), borderWidth: wp(0.5), borderColor: Assets.ic_primaryColor }} />
-                <Image source={Assets.ic_logo} style={{ width: wp(10), height: wp(10), position: 'absolute', bottom: wp(0), right: wp(0) }} />
+                <Image source={Assets.ic_Profile} style={{ width: wp(30), height: wp(30), borderRadius: wp(15), borderWidth: wp(0.5), borderColor: Assets.ic_primaryColor }} />
+                {/* <Image source={Assets.ic_logo} style={{ width: wp(10), height: wp(10), position: 'absolute', bottom: wp(0), right: wp(0) }} /> */}
                 </View>
           
         <ProileComponent/>

@@ -23,7 +23,9 @@ const LinearGradientBtn = (props) => {
             }}>
 
             <LinearGradient
-                colors={['#E33068' , '#F38B76']}
+                colors={['#E33068', '#F38B76']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
                 style={{
                     width: props.width,
                     height: props.height,
