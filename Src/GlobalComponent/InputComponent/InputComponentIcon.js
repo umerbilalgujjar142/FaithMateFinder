@@ -25,13 +25,14 @@ const InputComponentIcon = (props) => {
                         }}>
                 <TextInput
                     style={{
-                        
+                        // width: props.width,
                         paddingLeft: props.paddingLeft,
-                       
+                       paddingRight: props.paddingRight,
                         alignSelf: props.alignSelf,
                         color: props.color,
                         fontSize: props.fontSize,
                     }}
+                    multiline={props.multiline}
 
                     placeholder={props.placeholder}
                     placeholderTextColor={props.placeholderTextColor}

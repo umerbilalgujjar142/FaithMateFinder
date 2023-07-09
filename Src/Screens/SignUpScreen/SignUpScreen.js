@@ -46,8 +46,7 @@ const SignUpScreen = (props) => {
         }
         ).catch(error => {
             console.log("error", error)
-        }
-        )
+        })
 
     }
 
@@ -92,10 +91,8 @@ const SignUpScreen = (props) => {
                             
                                 {
                                     borderColor: isMalePressed ? 'red' : Assets.ic_waterColor,
-                                    borderWidth: isMalePressed ? wp(1) : wp(0.5),
+                                    borderWidth: isMalePressed ? wp(0.65) : wp(0.5),
                                   },
-                            
-                            
                             ]}>
                             <Text style={{ marginTop: wp(3.5) }}>Male</Text>
                             
@@ -109,14 +106,12 @@ const SignUpScreen = (props) => {
                             
                                 {
                                     borderColor: isFemalePressed ? 'red' : Assets.ic_waterColor,
-                                    borderWidth: isFemalePressed ? wp(1) : wp(0.5),
+                                    borderWidth: isFemalePressed ? wp(0.65) : wp(0.5),
                                   },
-                            
                             ]}>
                             <Text style={{ marginTop: wp(3.5) }}>Female</Text>
                             <Femalesymbol name="female-symbol" size={wp(5)} color={Assets.ic_Balck} style={{ marginTop: wp(3.5) }} />
                         </TouchableOpacity>
-
                     </View>
                 </View>
 
