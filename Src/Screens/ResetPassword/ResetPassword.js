@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import {
     Image,
     Text,
@@ -8,11 +8,29 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Assets from '../../Assets/Assets';
 import Styles from './Styles'
 import InputComponent from '../../GlobalComponent/InputComponent/InputComponent'
-import ButtonComponent from '../../GlobalComponent/ButtonComponent/ButtonComponent';
 import LinearGradientBtn from '../../GlobalComponent/ButtonComponent/LinearGradientBtn';
-
+import {ForgotPassword} from '../../API/add'
 
 const ResetPassword = (props) => {
+
+    const [email, setEmail] = useState('');
+
+    const forgotPassword = async () => {
+        let response = await ForgotPassword(email)
+        console.log("response", response)
+        if (response.status == 200) {
+            alert(response?.data?.message)
+            props.navigation.navigate('EnterOTP', { email: response?.data?.email })
+        }
+        else {
+            alert(response.data.message)
+        }
+    }
+
+
+
+
+
 
     return (
         <View style={Styles.conatainer}>
@@ -39,8 +57,8 @@ const ResetPassword = (props) => {
                 placeholder={'Email'}
                 placeholderTextColor={'#000'}
                 secureTextEntry={false}
-                onChangeText={(text) => console.log(text)}
-                value={''}
+                onChangeText={(text) => setEmail(text)}
+                value={email}
             />
             {/* for button */}
 
@@ -53,7 +71,9 @@ const ResetPassword = (props) => {
                    alignSelf={'center'}
                    textColor={'#fff'}
                    text={'Submit'}
-                   onPress={() => props.navigation.navigate('EnterOTP')}
+                //    onPress={() => { forgotPassword() }}
+                onPress={() => { props.navigation.navigate('EnterOTP',{email}) }}
+
                 />
 
         </View>

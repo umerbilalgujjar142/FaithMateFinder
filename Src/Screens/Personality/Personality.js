@@ -28,7 +28,7 @@ const Personality = (props) => {
 
         try {
             let response = await addPersonality(fun, book, food, dress, humor, hobbies,userId)
-            console.log(response)
+            console.log(response.data)
             if (response.data) {
                 alert("Personality Added Successfully")
                 props.navigation.navigate('Hobbies')
@@ -71,7 +71,6 @@ const Personality = (props) => {
                     backgroundColor={Assets.ic_tertiaryColor}
                     iconColor={Assets.ic_primaryColor}
                     onChangeText={(text) => setFun(text)}
-
                 />
 
 

@@ -25,6 +25,8 @@ const InputComponent = (props) => {
                     alignSelf: props.alignSelf,
                     color: props.color,
                     fontSize: props.fontSize,
+                    textAlignVertical: props.textAlignVertical,
+                    
                 }}
                 placeholder={props.placeholder}
                 placeholderTextColor={props.placeholderTextColor}

@@ -4,6 +4,7 @@ const Assets = {
     ic_logoWhite: require('./logo-white.png'),
     ic_splashbg: require('./splashbg.png'),
     ic_Profile: require('./Profile.png'),
+    ic_ProfileImage: require('./person.png'),
 
 
     

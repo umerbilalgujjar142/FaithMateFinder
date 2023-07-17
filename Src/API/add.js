@@ -56,7 +56,7 @@ export const loginUser = async (email, password) => {
 
 }
 
-export const addPersonality = async (fun, book, food, dress, humor, hobbies,userId) => {
+export const addPersonality = async (fun, book, food, dress, humor, hobbies, userId) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token')
 
@@ -64,27 +64,27 @@ export const addPersonality = async (fun, book, food, dress, humor, hobbies,user
         alert("Please fill all the fields")
     }
 
-    else { 
+    else {
         let response = await axios.post('http://10.0.2.2:3000/auth/api/user/personality', {
             fun,
             book,
             food,
             dress,
             humor,
-            hobbies, 
+            hobbies,
             userId
         },
-        {
-            headers: {
-                'x-access-token': USERTOKEN
-            }
+            {
+                headers: {
+                    'x-access-token': USERTOKEN
+                }
 
-        })
+            })
         return response
     }
 }
 
-export const addHobbies = async (selectedItems,selectedItems1,selectedItems2,selectedItems3,userId) => {
+export const addHobbies = async (selectedItems, selectedItems1, selectedItems2, selectedItems3, userId) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token')
 
@@ -93,28 +93,83 @@ export const addHobbies = async (selectedItems,selectedItems1,selectedItems2,sel
     }
     else {
         const requestData = {
-          selectedItems,
-          selectedItems1,
-          selectedItems2,
-          selectedItems3,
-          userId
+            fun: selectedItems,
+            food: selectedItems1,
+            movie: selectedItems2,
+            sport: selectedItems3,
+            userId
         };
 
-        console.log("response of th requested data is-->>",requestData);
-
         try {
-          const response = await axios.post('http://10.0.2.2:3000/auth/api/user/hobbies', requestData, {
-            headers: {
-              'x-access-token': USERTOKEN,
-              'Content-Type': 'application/json'
-            }
-          });
-          return response;
+            const response = await axios.post('http://10.0.2.2:3000/auth/api/user/hobbies', requestData, {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response;
         } catch (error) {
             console.log(error);
-            }
+        }
 
     }
 }
+
+//forgot Password
+
+export const ForgotPassword = async (email) => {
+
+    console.log("email", email);
+    const USERTOKEN = await AsyncStorage.getItem('token')
+
+
+    if (email == "") {
+        alert("Please enter email")
+    }
+    else if (!email.includes("@")) {
+        alert("Please enter valid email")
+    }
+    else {
+
+        let response = await axios.get('http://10.0.2.2:3000/auth/api/user/sendemail', {
+            email
+        },
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                }
+            })
+        return response
+
+    }
+}
+
+//Enter OTP
+
+
+export const EnterOTP = async (formattedOTP, email) => {
+    
+        const USERTOKEN = await AsyncStorage.getItem('token')
+    
+        console.log("email--", email);
+        console.log("formattedOTP--", formattedOTP);
+
+
+        if (formattedOTP == "") {
+            alert("Please enter OTP")
+        }
+        else {
+            let response = await axios.get('http://10.0.2.2:3000/auth/api/user/verify-otp',{
+                enteredOTP:formattedOTP,
+                email
+            },{
+                headers: {
+                    'x-access-token': USERTOKEN,
+                }
+            })
+            return response
+        }
+    }
+
 
 

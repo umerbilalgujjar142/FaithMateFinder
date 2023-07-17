@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Image,
+    Alert,
     Text,
     View, ScrollView
 } from 'react-native';
@@ -12,6 +12,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { addHobbies } from '../../API/add';
+
+
 
 const Hobbies = (props) => {
 
@@ -170,7 +172,7 @@ const Hobbies = (props) => {
 
     const Sports = [{
         name: 'Sports',
-        id: 2,
+        id: 3,
         // these are the children or 'sub items'
         children: [
             {
@@ -308,7 +310,6 @@ const Hobbies = (props) => {
     const onSelectedItemsChange3 = (selectedItems3) => {
 
         const selectedNames = [];
-      
         selectedItems3.forEach((itemId) => {
           Sports.forEach((foodItem) => {
             const selectedItem = foodItem.children.find((child) => child.id === itemId);
@@ -326,10 +327,16 @@ const Hobbies = (props) => {
         try {
 
           const user_id = await AsyncStorage.getItem('userid');
-          
           const response = await addHobbies(selectedItems, selectedItems1, selectedItems2, selectedItems3, user_id);
-
-          console.log(response.data);
+            if(response.data.status == 'success'){
+                alert('Hobbies Added Successfully')
+                props.navigation.navigate('Profile')
+            }
+            else
+            {
+                alert('Something went wrong')
+            }
+          
           
         } catch (error) {
           console.log("Error:", error);
@@ -372,6 +379,8 @@ const Hobbies = (props) => {
                 />
 
 
+
+
                 <Text style={Styles.itemText}>What Foods do you like most?</Text>
 
 
@@ -386,7 +395,7 @@ const Hobbies = (props) => {
                     uniqueKey="id"
                     subKey="children"
                     selectText="Choose Foods..."
-                    showDropDowns={true}
+                    //showDropDowns={true}
                     onSelectedItemsChange={onSelectedItemsChange1}
                     selectedItems={selectedItems1}
                 />
