@@ -58,9 +58,9 @@ const SignUpScreen = (props) => {
 
             <View style={Styles.View1}>
                 <View style={Styles.View2}>
-                    <Text style={Styles.selectionText}>First Name</Text>
+                    {/* <Text style={Styles.selectionText}>First Name</Text> */}
 
-                    <Text style={Styles.wantChange}>Wan't be able to change name later</Text>
+                    <Text style={Styles.wantChange}>Your username once created, cannot be changed </Text>
                 </View>
 
                 <InputComponent
@@ -83,7 +83,7 @@ const SignUpScreen = (props) => {
 
                 <View style={{ marginTop: wp(3) }}>
 
-                    <Text style={Styles.selectionText}>Select Gender</Text>
+                    {/* <Text style={Styles.selectionText}>Select Gender</Text> */}
                     <View style={Styles.ViewMale}>
 
                         <TouchableOpacity onPress={() => handlePressIn('Male')}

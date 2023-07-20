@@ -25,6 +25,8 @@ const LoginScreen = (props) => {
                 console.log("response", response.data.user.id)
                 if (response.data.status == "success") {
                     alert(response.data.status)
+                    setEmail('')
+                    setPassword('')
                     AsyncStorage.setItem('token', response.data.token)
                     AsyncStorage.setItem('fullname', response.data.user.fullname)
                      props.navigation.navigate('Profile')
@@ -48,8 +50,8 @@ const LoginScreen = (props) => {
             </View>
 
             <View style={{ paddingHorizontal: wp(4) }}>
-                <Text style={Styles.letsMatch}>LET'S Match your</Text>
-                <Text style={Styles.letsMatch}>Favorite</Text>
+                <Text style={Styles.letsMatch}>Something great is brewing,</Text>
+                <Text style={Styles.letsMatch}>So let’s get you connected!</Text>
             </View>
 
 
@@ -89,7 +91,7 @@ const LoginScreen = (props) => {
             />
 
             <TouchableOpacity onPress={() => props.navigation.navigate("ResetPassword")} style={Styles.toucableForget}>
-                <Text style={Styles.signUpText}>Forget Password?</Text>
+                <Text style={Styles.signUpText}>Forgot Password?</Text>
             </TouchableOpacity>
 
 

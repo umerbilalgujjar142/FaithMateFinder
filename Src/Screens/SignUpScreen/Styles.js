@@ -14,10 +14,10 @@ signUptext:{
      fontWeight: 'bold', 
     fontSize: wp(6), 
     top: wp(5), 
-    paddingHorizontal: wp(5) 
+    paddingHorizontal: wp(4) 
 },
 View1:{
-    paddingHorizontal: wp(7), marginTop: wp(10)
+    paddingHorizontal: wp(4), marginTop: wp(10)
 }
 ,
 View2:{
@@ -28,10 +28,10 @@ selectionText:{
     color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(4)
 },
 wantChange:{
-    color: Assets.ic_primaryColor, fontSize: wp(3)
+    color: Assets.ic_primaryColor, fontSize: wp(3),textAlign:'right',width:wp(95),paddingHorizontal:wp(5)
 },
 ViewMale:{
-    flexDirection: 'row', justifyContent: 'space-between', marginTop: wp(5)
+    flexDirection: 'row', justifyContent: 'space-between', marginTop: wp(5),paddingHorizontal:wp(3)
 },
 ViewMale1:{
     height: hp(7), width: wp(40), borderColor: Assets.ic_waterColor, borderWidth: wp(0.5), borderRadius: wp(10),flexDirection: 'row', justifyContent: 'space-between',paddingHorizontal:wp(4)

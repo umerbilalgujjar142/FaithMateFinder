@@ -43,16 +43,23 @@ export const loginUser = async (email, password) => {
     else if (!email.includes("@")) {
         alert("Please enter valid email")
     }
-    else if (!email.includes(".com")) {
-        alert("Please enter valid email")
+    else if(password.length < 6){
+        alert("Password must be 6 character long")
     }
     else {
+        try {
         let response = await axios.post('http://10.0.2.2:3000/auth/api/user/login', {
             email,
             password
         })
         return response
     }
+    catch(error){
+        console.log(error)
+    }
+
+}
+
 
 }
 
@@ -148,28 +155,50 @@ export const ForgotPassword = async (email) => {
 
 
 export const EnterOTP = async (formattedOTP, email) => {
-    
-        const USERTOKEN = await AsyncStorage.getItem('token')
-    
-        console.log("email--", email);
-        console.log("formattedOTP--", formattedOTP);
+
+    const USERTOKEN = await AsyncStorage.getItem('token')
 
 
-        if (formattedOTP == "") {
-            alert("Please enter OTP")
-        }
-        else {
-            let response = await axios.get('http://10.0.2.2:3000/auth/api/user/verify-otp',{
-                enteredOTP:formattedOTP,
-                email
-            },{
-                headers: {
-                    'x-access-token': USERTOKEN,
-                }
-            })
-            return response
-        }
+    if (formattedOTP == "") {
+        alert("Please enter OTP")
     }
+    else {
+        let response = await axios.get('http://10.0.2.2:3000/auth/api/user/verify-otp', {
+            enteredOTP: formattedOTP,
+            email
+        }, {
+            headers: {
+                'x-access-token': USERTOKEN,
+            }
+        })
+        return response
+    }
+}
 
 
+//confimr Password
 
+export const ConfirmPassword = async (userId, password) => {
+    const USERTOKEN = await AsyncStorage.getItem('token')
+    const requestData = {
+      userId: userId,
+      password: password
+    };
+    if (password == "") {
+      alert("Please enter password")
+    } else if (password.length < 6) {
+      alert("Password must be 6 characters long")
+    } else {
+      try {
+        const response = await axios.put('http://10.0.2.2:3000/auth/api/user/updatedPassword', requestData, {
+          headers: {
+            'x-access-token': USERTOKEN,
+            'Content-Type': 'application/json'
+          }
+        })
+        return response
+      } catch (error) {
+        throw new Error(error.response.data.message)
+      }
+    }
+  }

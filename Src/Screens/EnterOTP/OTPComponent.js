@@ -15,6 +15,7 @@ const OTPComponent = (props) => {
 
     const [otp, setOtp] = React.useState(['', '', '', '', '']);
     const [email, setEmail] = React.useState(props?.Email);
+    const navigation = props.props.navigation;
 
     const handleOTPChange = (value, index) => {
         const updatedOtp = [...otp];
@@ -24,14 +25,12 @@ const OTPComponent = (props) => {
 
     const handleSubmitButton = () => {
 
-     const formattedOTP = otp.join('');
-
-
+        const formattedOTP = otp.join('');
         EnterOTP(formattedOTP, email).then((res) => {
             console.log("res--->>>", res.data);
             if (res.status == 200) {
                 console.log("res", res);
-                props.navigation.navigate('LoginScreen')
+                props.navigation.navigate('ConfirmPasswords')
             }
             else {
                 console.log("res", res);
@@ -46,7 +45,7 @@ const OTPComponent = (props) => {
 
 
     return (
-        <View>
+        <>
 
             <View style={Styles.ViewMainOTP}>
 
@@ -104,6 +103,7 @@ const OTPComponent = (props) => {
                     placeholderTextColor={Assets.ic_Balck}
                 />
             </View>
+
             <LinearGradientBtn
                 width={wp(90)}
                 height={hp(7)}
@@ -112,7 +112,8 @@ const OTPComponent = (props) => {
                 alignSelf={'center'}
                 textColor={'#fff'}
                 text={'Verify OTP'}
-                onPress={() => { handleSubmitButton() }}
+                // onPress={() => { handleSubmitButton() }}
+                onPress={() => navigation.navigate('ConfirmPasswords')}
             />
 
             <ButtonComponent
@@ -125,9 +126,10 @@ const OTPComponent = (props) => {
                 alignSelf={'center'}
                 textColor={'#000'}
                 text={'Resend OTP'}
-            // onPress={() => props.navigation.navigate('Resend OTP')}
+            // onPress={() => setIsConfirm(true)}
             />
-        </View>
+
+        </>
     )
 
 

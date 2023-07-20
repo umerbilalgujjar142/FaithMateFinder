@@ -43,7 +43,6 @@ const ResetPassword = (props) => {
                 <Text style={Styles.oppsText}>Opps. It happens to the best of us. Input your email to fix the issue.</Text>
             </View>
 
-            {/* input for email */}
             <InputComponent
                 width={wp(90)}
                 height={hp(7)}
@@ -60,7 +59,6 @@ const ResetPassword = (props) => {
                 onChangeText={(text) => setEmail(text)}
                 value={email}
             />
-            {/* for button */}
 
 
             <LinearGradientBtn
@@ -71,7 +69,7 @@ const ResetPassword = (props) => {
                    alignSelf={'center'}
                    textColor={'#fff'}
                    text={'Submit'}
-                //    onPress={() => { forgotPassword() }}
+                //   onPress={() => { forgotPassword() }}
                 onPress={() => { props.navigation.navigate('EnterOTP',{email}) }}
 
                 />

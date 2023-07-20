@@ -41,6 +41,13 @@ const styles = StyleSheet.create({
         marginTop: hp(5), 
         flexDirection: 'row', 
         justifyContent: 'center'
+    },
+  
+    RestPass:{
+        color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(6)
+    },
+    oppsText:{
+        fontSize: wp(3.5),width:wp(63),color:'#36454F'
     }
 })
 export default styles;

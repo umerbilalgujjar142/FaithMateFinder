@@ -19,7 +19,7 @@ Images:{
     height: hp('30%') 
 },
 letsMatch:{
-    color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(6)
+    color: Assets.ic_Balck, fontWeight: '700', fontSize: wp(4.5)
 },
 toucableForget:{
     flexDirection: 'row', justifyContent: 'flex-end', marginTop: wp(2), paddingHorizontal: wp(5)

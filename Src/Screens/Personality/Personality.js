@@ -30,6 +30,13 @@ const Personality = (props) => {
             let response = await addPersonality(fun, book, food, dress, humor, hobbies,userId)
             console.log(response.data)
             if (response.data) {
+                setFun('')
+                setBook('')
+                setFood('')
+                setDress('')
+                setHumor('')
+                setHobbies('')
+                
                 alert("Personality Added Successfully")
                 props.navigation.navigate('Hobbies')
             }
@@ -94,7 +101,7 @@ const Personality = (props) => {
 
                 />
 
-                <Text style={Styles.textPersonality}>What sort of food do you like?</Text>
+                <Text style={Styles.textPersonality}>What type of food do you like?</Text>
                 <InputComponentIcon
                     iconName='pencil'
                     width={wp(90)}

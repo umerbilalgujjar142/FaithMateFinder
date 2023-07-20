@@ -67,9 +67,6 @@ const Profile = (props) => {
                     style={Styles.imageAvatar} />
             </TouchableOpacity>
 
-
-
-
             <ProileComponent />
 
             <LinearGrdientBtn
@@ -82,7 +79,7 @@ const Profile = (props) => {
                 borderColor={Assets.ic_primaryColor}
                 borderWidth={wp(0.5)}
                 alignSelf={'center'}
-                top={wp(25)}
+                top={wp(30)}
                 onPress={() => { props.navigation.navigate('Personality') }}
             />
 

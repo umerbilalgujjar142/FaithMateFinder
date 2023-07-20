@@ -359,7 +359,7 @@ const Hobbies = (props) => {
                 contentContainerStyle={{ paddingVertical: wp(10) }}
             >
 
-                <Text style={Styles.itemText}>What do you do for fun</Text>
+                <Text style={Styles.itemText}>What does a fun day for you look like?</Text>
 
 
                 <SectionedMultiSelect
@@ -404,7 +404,7 @@ const Hobbies = (props) => {
 
 
 
-                <Text style={Styles.itemText}>What type of Movies do you like?</Text>
+                <Text style={Styles.itemText}>Which types of movies do you like to watch?</Text>
                 <SectionedMultiSelect
                     items={Movies}
                     showCancelButton={true}
@@ -421,7 +421,7 @@ const Hobbies = (props) => {
                     selectedItems={selectedItems2}
                 />
 
-                <Text style={Styles.itemText}>What type of Sports do you like?</Text>
+                <Text style={Styles.itemText}>Which sports do you play or like to watch?</Text>
                 <SectionedMultiSelect
                     items={Sports}
                     showCancelButton={true}
