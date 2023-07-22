@@ -33,6 +33,8 @@ const InputComponent = (props) => {
                 secureTextEntry={props.secureTextEntry}
                 onChangeText={props.onChangeText}
                 value={props.value}
+                maxLength={props.maxLength}
+                keyboardType={props.keyboardType}
             />
         </View>
 

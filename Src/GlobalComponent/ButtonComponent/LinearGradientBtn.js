@@ -20,6 +20,8 @@ const LinearGradientBtn = (props) => {
                 alignSelf: props.alignSelf,
                 justifyContent: 'center',
                 alignItems: 'center',
+                position: props.position,
+                bottom: props.bottom,
             }}>
 
             <LinearGradient
