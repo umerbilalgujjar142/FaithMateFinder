@@ -117,7 +117,9 @@ const Profile = (props) => {
                 <TouchableOpacity style={Styles.profileView} onPress={() => chooseFile('photo')}>
 
                     <Image
-                        source={file !== "" && file !== null ? { uri: `http://192.168.200.190:3000/uploads/${file}` } : Assets.ic_ProfileImage}
+                        // source={file !== "" && file !== null ? { uri: `http://192.168.200.190:3000/uploads/${file}` } : Assets.ic_ProfileImage}
+                        source={ Assets.ic_ProfileImage}
+                       
                         style={Styles.imageAvatar}
                     />
 
@@ -176,9 +178,9 @@ const Profile = (props) => {
                 borderWidth={wp(0.5)}
                 alignSelf={'center'}
                 top={wp(30)}
-                onPress={() => { UpdateProfileData() }}
+                // onPress={() => { UpdateProfileData() }}
 
-            // onPress={() => { props.navigation.navigate('Personality') }}
+            onPress={() => { props.navigation.navigate('Personality') }}
             />
 
         </View>

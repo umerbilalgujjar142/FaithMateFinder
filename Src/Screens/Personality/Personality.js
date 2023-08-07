@@ -57,7 +57,7 @@ const Personality = (props) => {
                     <Text style={Styles.textStyle}>Personality</Text>
                 </View>
                 <View style={Styles.faithViw}>
-                    <Text style={{ color: '#8C8C8C', top: wp(2) }}>Let others know what your interests are and help us connect you with other users that may have similar interests.</Text>
+                    <Text style={{ color: '#8C8C8C', top: wp(2) }}>Let others know what your life preferences are and let us connect you with other users that have similar preferences.</Text>
                 </View>
 
                 <Text style={Styles.textPersonality}>What do you do for fun</Text>
@@ -101,7 +101,7 @@ const Personality = (props) => {
 
                 />
 
-                <Text style={Styles.textPersonality}>What type of food do you like?</Text>
+                <Text style={Styles.textPersonality}>Which type of food do you like?</Text>
                 <InputComponentIcon
                     iconName='pencil'
                     width={wp(90)}

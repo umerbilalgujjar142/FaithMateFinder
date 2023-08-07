@@ -11,7 +11,7 @@ import Profile from './Src/Screens/Profile/Profile';
 import Hobbies from './Src/Screens/Hobbies/Hobbies';
 import Personality from './Src/Screens/Personality/Personality';
 import ConfirmPasswords from './Src/Screens/ConfirmPassword/ConfirmPassword';
-
+import MainScreen from './Src/Screens/MainScreen/MainScreen';
 
 
 
@@ -32,9 +32,7 @@ function App() {
         <Stack.Screen name="Personality" component={Personality} options={{headerShown:false}} />
         <Stack.Screen name="Hobbies" component={Hobbies} options={{headerShown:false}} />
         <Stack.Screen name="ConfirmPasswords" component={ConfirmPasswords} options={{headerShown:false}} />
-
-
-
+        <Stack.Screen name="MainScreen" component={MainScreen} options={{headerShown:false}} />
 
 
       </Stack.Navigator>

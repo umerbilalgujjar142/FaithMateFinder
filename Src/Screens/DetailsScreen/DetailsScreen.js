@@ -22,14 +22,11 @@ const DetailsScreen = (props) => {
                 <Text style={Styles.textStyle}>Embrace A</Text>
                 <Text style={Styles.textStyle}>Different Kind</Text>
                 <Text style={Styles.textStyle}>Of Dating</Text>
-
             </View>
+            
             <View style={Styles.faithViw}>
-                <Text style={{ color: '#8C8C8C' }}>Faith Mate Finder match-making boutique has a unique business model, different from what you see in the industry. What sets us apart from your typical online dating service is our service offerings and the quality of our connections.</Text>
+                <Text style={{ color: '#000' }}>Faith Mate Finder match-making boutique has a unique business model, different from what you see in the industry. What sets us apart from your typical online dating service is our service offerings and the quality of our connections.</Text>
             </View>
-
-        
-
 
             <TouchableOpacity onPress={()=>props.navigation.navigate('LoginScreen')} style={Styles.toucableLogin}>
                 <View style={Styles.ViewStarted}>

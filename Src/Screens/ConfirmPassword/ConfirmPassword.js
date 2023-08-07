@@ -46,7 +46,7 @@ const ConfirmPasswords = (props) => {
         <Image source={Assets.ic_logo} style={Styles.Images} resizeMode='contain' />
       </View>
       <View style={{ paddingHorizontal: wp(6) }}>
-        <Text style={Styles.EnterOTPText}>Set new password</Text>
+        <Text style={Styles.EnterOTPText}>Create new password</Text>
         <Text style={[Styles.EnterOTPText,{fontSize:wp(4),fontWeight:null,color:Assets.ic_Balck}]}>Enter your new password below</Text>
 
 

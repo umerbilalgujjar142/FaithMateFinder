@@ -19,19 +19,19 @@ Images:{
     height: hp('30%') 
 },
 letsMatch:{
-    color: Assets.ic_Balck, fontWeight: '700', fontSize: wp(4.5)
+    color: Assets.ic_Balck,  fontSize: wp(4)
 },
 toucableForget:{
     flexDirection: 'row', justifyContent: 'flex-end', marginTop: wp(2), paddingHorizontal: wp(5)
 },
 signUpText:{
-    color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(4.2)
+    color: Assets.ic_Balck,  fontSize: wp(4.2)
 },
 doesntHave:{
     flexDirection: 'row', justifyContent: 'center', marginTop: wp(2), paddingHorizontal: wp(5)
 },
 forgettEXT:{
-    color: Assets.ic_primaryColor, fontWeight: 'bold', fontSize: wp(4) 
+    color: Assets.ic_primaryColor,  fontSize: wp(4) 
 }
 })
 export default styles;

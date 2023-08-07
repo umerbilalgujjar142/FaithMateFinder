@@ -25,27 +25,84 @@ const Hobbies = (props) => {
             // these are the children or 'sub items'
             children: [
                 {
-                    name: 'Art & painitng',
+                    name: 'Traveling',
                     id: 10,
                 },
                 {
-                    name: 'Book Reading',
+                    name: 'Outdoor sports',
                     id: 17,
                 },
                 {
-                    name: 'Fashion Event',
+                    name: 'Cooking',
                     id: 13,
                 },
                 {
-                    name: 'Cycling',
+                    name: 'Movies',
                     id: 14,
                 },
                 {
-                    name: 'Games',
+                    name: 'Music Concerts',
                     id: 15,
                 },
                 {
-                    name: 'Cricket',
+                    name: 'Art work/Painting ',
+                    id: 16,
+                },
+
+
+                {
+                    name: 'Dancing',
+                    id: 10,
+                },
+                {
+                    name: 'Photography',
+                    id: 17,
+                },
+                {
+                    name: 'Museums',
+                    id: 13,
+                },
+              
+                {
+                    name: 'Exercising',
+                    id: 15,
+                },
+                {
+                    name: 'Operas ',
+                    id: 16,
+                },
+
+                {
+                    name: 'Learning a new language',
+                    id: 10,
+                },
+               
+                {
+                    name: 'Shopping',
+                    id: 13,
+                },
+                {
+                    name: 'Home Improvement',
+                    id: 14,
+                },
+                {
+                    name: 'Fashion Events',
+                    id: 15,
+                },
+                {
+                    name: 'Camping',
+                    id: 16,
+                },
+                {
+                    name: 'Community Service',
+                    id: 16,
+                },
+                {
+                    name: 'Reading',
+                    id: 16,
+                },
+                {
+                    name: 'Chilling at home',
                     id: 16,
                 },
             ],
@@ -53,6 +110,9 @@ const Hobbies = (props) => {
         },
 
     ];
+
+
+
     const Foods = [{
         name: 'Food & Drink',
         id: 1,
@@ -349,17 +409,17 @@ const Hobbies = (props) => {
     return (
         <View style={Styles.conatainer}>
             <View style={{ marginTop: wp(10) }}>
-                <Text style={Styles.textStyle}>Hobbies & Interest</Text>
+                <Text style={Styles.textStyle}>Hobbies</Text>
             </View>
             <View style={Styles.faithViw}>
-                <Text style={Styles.describeText}>Faith Mate Finder match-making boutique has a unique business model, different from what you see in the industry. What sets us apart from your typical online dating service is our service offerings and the quality of our connections.</Text>
+                <Text style={Styles.describeText}>Let others know what your interests are and let us connect you with other users that have similar interests.</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingVertical: wp(10) }}
             >
 
-                <Text style={Styles.itemText}>What does a fun day for you look like?</Text>
+                <Text style={Styles.itemText}>What do you do for fun?</Text>
 
 
                 <SectionedMultiSelect
@@ -372,7 +432,7 @@ const Hobbies = (props) => {
                     text={Assets.ic_secondaryColor}
                     uniqueKey="id"
                     subKey="children"
-                    selectText="Choose hobbies..."
+                    selectText="Choose Activity..."
                     showDropDowns={true}
                     onSelectedItemsChange={onSelectedItemsChange}
                     selectedItems={selectedItems}
@@ -381,64 +441,7 @@ const Hobbies = (props) => {
 
 
 
-                <Text style={Styles.itemText}>What Foods do you like most?</Text>
-
-
-                <SectionedMultiSelect
-                    items={Foods}
-                    showCancelButton={true}
-                    IconRenderer={Icon}
-                    color={Assets.ic_secondaryColor}
-                    subText={Assets.ic_secondaryColor}
-                    primary={Assets.ic_secondaryColor}
-                    text={Assets.ic_secondaryColor}
-                    uniqueKey="id"
-                    subKey="children"
-                    selectText="Choose Foods..."
-                    //showDropDowns={true}
-                    onSelectedItemsChange={onSelectedItemsChange1}
-                    selectedItems={selectedItems1}
-                />
-
-
-
-
-
-                <Text style={Styles.itemText}>Which types of movies do you like to watch?</Text>
-                <SectionedMultiSelect
-                    items={Movies}
-                    showCancelButton={true}
-                    IconRenderer={Icon}
-                    color={Assets.ic_secondaryColor}
-                    subText={Assets.ic_secondaryColor}
-                    primary={Assets.ic_secondaryColor}
-                    text={Assets.ic_secondaryColor}
-                    uniqueKey="id"
-                    subKey="children"
-                    selectText="Choose Movies..."
-                    showDropDowns={true}
-                    onSelectedItemsChange={onSelectedItemsChange2}
-                    selectedItems={selectedItems2}
-                />
-
-                <Text style={Styles.itemText}>Which sports do you play or like to watch?</Text>
-                <SectionedMultiSelect
-                    items={Sports}
-                    showCancelButton={true}
-                    IconRenderer={Icon}
-                    color={Assets.ic_secondaryColor}
-                    subText={Assets.ic_secondaryColor}
-                    primary={Assets.ic_secondaryColor}
-                    text={Assets.ic_secondaryColor}
-                    uniqueKey="id"
-                    subKey="children"
-                    selectText="Choose Sports..."
-                    showDropDowns={true}
-                    onSelectedItemsChange={onSelectedItemsChange3}
-                    selectedItems={selectedItems3}
-                />
-
-
+                <View style={{height:wp(80)}}>
                 <LinearGradientBtn
                     width={wp(83)}
                     height={wp(12)}
@@ -449,10 +452,11 @@ const Hobbies = (props) => {
                     borderColor={Assets.ic_primaryColor}
                     borderWidth={wp(0.5)}
                     alignSelf={'center'}
-                    top={wp(5)}
+                    top={wp(50)}
                     // onPress={() => { props.navigation.navigate('LoginScreen') }}
                     onPress={() => AddHoobies()}
                 />
+                </View>
             </ScrollView>
 
 

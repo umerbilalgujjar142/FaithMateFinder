@@ -21,8 +21,8 @@ const EnterOTP = (props) => {
                 <Image source={Assets.ic_logo} style={Styles.Images} resizeMode='contain' />
             </View>
             <View style={{ paddingHorizontal: wp(6) }}>
-                <Text style={Styles.EnterOTPText}>Enter OTP</Text>
-                <Text style={[Styles.EnterOTPText, { fontSize: wp(4), fontWeight: null, color: Assets.ic_Balck }]}>Enter the 5-digit code sent on</Text>
+                <Text style={Styles.EnterOTPText}>Verification Code</Text>
+                <Text style={[Styles.EnterOTPText, { fontSize: wp(4), fontWeight: null, color: Assets.ic_Balck }]}>Enter the 5-digit code sent to</Text>
                 <Text style={[Styles.EnterOTPText, { fontSize: wp(4), fontWeight: null, color: Assets.ic_Balck }]}>{email}</Text>
             </View>
             <OTPComponent Email={email} props={props}/>

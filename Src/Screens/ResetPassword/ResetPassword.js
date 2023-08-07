@@ -38,9 +38,9 @@ const ResetPassword = (props) => {
                 <Image source={Assets.ic_logo} style={Styles.Images} resizeMode='contain' />
             </View>
 
+                <Text style={Styles.RestPass}>   Password Reset</Text>
             <View style={{ paddingHorizontal: wp(4) }}>
-                <Text style={Styles.RestPass}>Reset Password</Text>
-                <Text style={Styles.oppsText}>Opps. It happens to the best of us. Input your email to fix the issue.</Text>
+                <Text style={Styles.oppsText}>Oops! It happens to the best of us. Provide your email below, so we can fix the issue.</Text>
             </View>
 
             <InputComponent
