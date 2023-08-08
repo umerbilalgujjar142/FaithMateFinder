@@ -12,7 +12,8 @@ import Hobbies from './Src/Screens/Hobbies/Hobbies';
 import Personality from './Src/Screens/Personality/Personality';
 import ConfirmPasswords from './Src/Screens/ConfirmPassword/ConfirmPassword';
 import MainScreen from './Src/Screens/MainScreen/MainScreen';
-
+import FilteredPosts from './Src/Screens/FilteredPosts/FilteredPosts';
+import GotMatchPeople from './Src/Screens/GotMatchPeople/GotMatchPeople';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,10 @@ function App() {
         <Stack.Screen name="Hobbies" component={Hobbies} options={{headerShown:false}} />
         <Stack.Screen name="ConfirmPasswords" component={ConfirmPasswords} options={{headerShown:false}} />
         <Stack.Screen name="MainScreen" component={MainScreen} options={{headerShown:false}} />
+        <Stack.Screen name="FilteredPosts" component={FilteredPosts} options={{headerShown:false}} />
+        <Stack.Screen name="GotMatchPeople" component={GotMatchPeople} options={{headerShown:false}} />
+
+
 
 
       </Stack.Navigator>

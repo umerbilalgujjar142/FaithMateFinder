@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Image,
     Text,
-    View, TextInput, FlatList
+    View, TextInput, FlatList, Pressable
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
@@ -72,10 +72,12 @@ const MainScreen = (props) => {
             <View style={{ marginTop: wp(5), flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5) }}>
                 <Text style={{ color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(5) }}>Best Matches</Text>
 
-                <Text style={{ color: Assets.ic_primaryColor, fontWeight: 'bold', fontSize: wp(5) }}>See All</Text>
+                <Pressable onPress={() => props.navigation.navigate('FilteredPosts')}>
+                    <Text style={{ color: Assets.ic_primaryColor, fontWeight: 'bold', fontSize: wp(5) }}>See All</Text>
+                </Pressable>
             </View>
 
-            <View style={{marginBottom:wp(3),height:wp(80)}}>
+            <View style={{ marginBottom: wp(3), height: wp(80) }}>
                 <FlatList
                     data={postList}
                     showsVerticalScrollIndicator={false}
