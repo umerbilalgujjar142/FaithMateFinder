@@ -12,7 +12,7 @@ const SplashScreen = (props) => {
     useEffect(() => {
         setTimeout(() => {
             // props.navigation.navigate('DetailsScreen')
-            props.navigation.navigate('MainScreen')
+            props.navigation.navigate('MyTabs')
         }, 3000);
     }, [])
 

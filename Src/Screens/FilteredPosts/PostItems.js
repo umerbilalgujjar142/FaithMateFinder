@@ -6,34 +6,34 @@ import Assets from '../../Assets/Assets';
 
 const PostItems = ({ image, props, location }) => {
   return (
-    <TouchableOpacity onPress={()=>props.navigation.navigate("GotMatchPeople")} style={styles.container}>
+    <View style={styles.container}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.overlay}>
         <View style={styles.footer}>
           <Text style={styles.location}>{location}</Text>
           <View style={styles.icons}>
             <TouchableOpacity style={styles.iconContainer}>
-              <Ionicons name="heart-outline" size={24} color={Assets.ic_primaryColor} />
+              <Ionicons name="heart" size={24} color={Assets.ic_primaryColor} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconContainer}>
-              <Ionicons name="chatbubble-outline" size={24} color={Assets.ic_primaryColor} />
+              <Ionicons name="chatbubble" size={24} color={Assets.ic_primaryColor} />
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   image: {
     width: '90%',
     height: 200,
-    borderRadius:wp(5),marginTop:wp(5),
+    borderRadius:wp(5),marginTop:wp(1),
     alignSelf:'center'
   },
   overlay: {

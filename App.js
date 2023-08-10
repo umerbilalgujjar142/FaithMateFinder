@@ -11,10 +11,7 @@ import Profile from './Src/Screens/Profile/Profile';
 import Hobbies from './Src/Screens/Hobbies/Hobbies';
 import Personality from './Src/Screens/Personality/Personality';
 import ConfirmPasswords from './Src/Screens/ConfirmPassword/ConfirmPassword';
-import MainScreen from './Src/Screens/MainScreen/MainScreen';
-import FilteredPosts from './Src/Screens/FilteredPosts/FilteredPosts';
-import GotMatchPeople from './Src/Screens/GotMatchPeople/GotMatchPeople';
-
+import MyTabs from './Src/BottomTabNavigation/BottomTabNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +21,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}} />
+        <Stack.Screen name="MyTabs" component={MyTabs} options={{headerShown:false}} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{headerShown:false}} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown:false}} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown:false}} />
@@ -33,9 +31,6 @@ function App() {
         <Stack.Screen name="Personality" component={Personality} options={{headerShown:false}} />
         <Stack.Screen name="Hobbies" component={Hobbies} options={{headerShown:false}} />
         <Stack.Screen name="ConfirmPasswords" component={ConfirmPasswords} options={{headerShown:false}} />
-        <Stack.Screen name="MainScreen" component={MainScreen} options={{headerShown:false}} />
-        <Stack.Screen name="FilteredPosts" component={FilteredPosts} options={{headerShown:false}} />
-        <Stack.Screen name="GotMatchPeople" component={GotMatchPeople} options={{headerShown:false}} />
 
 
 

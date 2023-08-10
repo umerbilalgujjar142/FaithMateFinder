@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Image,
     Text,
-    View, TextInput, FlatList, Pressable
+    View, TextInput, FlatList, Pressable, Modal
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
@@ -11,10 +11,12 @@ import Filter from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StatusItem from './StatusScreen';
 import PostItems from './PostItems';
-
+import FilteredPosts from './FilteredModal';
 
 const MainScreen = (props) => {
 
+
+    const [modalVisible, setModalVisible] = useState(false);
     const statusData = [
         { id: '1', username: 'user1', image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80' },
         { id: '2', username: 'user2', image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80' },
@@ -40,13 +42,21 @@ const MainScreen = (props) => {
         // Add more posts here
     ];
 
+
+    const closeModal = () => {
+        setModalVisible(false);
+      };
+
+
     return (
-        <View style={{ flex: 1, backgroundColor: '#fff', }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5), marginTop: wp(5) }}>
-                <Image source={Assets.ic_ProfileImage} style={{ width: wp(10), height: wp(10) }} resizeMode='contain' />
-                <Filter name="filter" size={wp(10)} color={Assets.ic_primaryColor} />
+        <View style={Styles.container1}>
+            <View style={Styles.filteredView}>
+                <Image source={Assets.ic_ProfileImage} style={Styles.imageStyle} resizeMode='contain' />
+                <Pressable onPress={() => setModalVisible(true)}>
+                    <Filter name="filter" size={wp(10)} color={Assets.ic_primaryColor} />
+                </Pressable>
             </View>
-            <Text style={{ fontSize: wp(7), paddingHorizontal: wp(5), top: wp(4), color: Assets.ic_Balck, fontWeight: 'bold' }}>Welcome, EDWARD</Text>
+            <Text style={Styles.WelcomeText}>Welcome, EDWARD</Text>
 
             <View style={Styles.container}>
                 <Icon name="search" size={25} color={Assets.ic_primaryColor} style={Styles.icon} />
@@ -69,11 +79,11 @@ const MainScreen = (props) => {
                 />
             </View>
 
-            <View style={{ marginTop: wp(5), flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5) }}>
-                <Text style={{ color: Assets.ic_Balck, fontWeight: 'bold', fontSize: wp(5) }}>Best Matches</Text>
+            <View style={Styles.BestMatches}>
+                <Text style={Styles.BestMatchText}>Best Matches</Text>
 
                 <Pressable onPress={() => props.navigation.navigate('FilteredPosts')}>
-                    <Text style={{ color: Assets.ic_primaryColor, fontWeight: 'bold', fontSize: wp(5) }}>See All</Text>
+                    <Text style={Styles.SeeAll}>See All</Text>
                 </Pressable>
             </View>
 
@@ -81,22 +91,28 @@ const MainScreen = (props) => {
                 <FlatList
                     data={postList}
                     showsVerticalScrollIndicator={false}
+                    onRequestClose={closeModal}
                     renderItem={({ item }) => (
                         <PostItems
                             image={item.image}
                             text={item.text}
                             location={item.location}
+                            
                         />
                     )}
                     keyExtractor={(item) => item.id}
                 />
-
             </View>
+            
 
-
-
-
-
+            <Modal
+                animationType="slide"
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}>
+                <FilteredPosts closeModal={() => setModalVisible(false)}/>
+            </Modal>
 
         </View>
     )

@@ -83,7 +83,6 @@ const SignUpScreen = (props) => {
 
                 <View style={{ marginTop: wp(3) }}>
 
-                    {/* <Text style={Styles.selectionText}>Select Gender</Text> */}
                     <View style={Styles.ViewMale}>
 
                         <TouchableOpacity onPress={() => handlePressIn('Male')}

@@ -5,9 +5,10 @@ import {
     View, TouchableOpacity, ScrollView,FlatList
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Assets from '../../Assets/Assets';
 import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderComponent';
 import PostItems from './PostItems';
+import Styles from './Styles'
+
 
 const FilteredPosts = (props) => {
 
@@ -34,45 +35,45 @@ const FilteredPosts = (props) => {
     ];
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#fff', }}>
+        <View style={Styles.container1}>
             <HeaderComponent headerText={'Filtered Posts'} />
 
             <View
-                style={{ position: 'absolute', marginTop: wp(18), width: wp(100), height: hp(7), flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: wp(5) }}>
+                style={Styles.View1}>
 
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <TouchableOpacity
                         style={[
-                            styles.button,
-                            selectedOption === 'popular' && styles.selectedButton,
+                            Styles.button,
+                            selectedOption === 'popular' && Styles.selectedButton,
                         ]}
                         onPress={() => handleOptionChange('popular')}
                     >
-                        <Text style={styles.buttonText}>Popular</Text>
+                        <Text style={Styles.buttonText}>Popular</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[
-                            styles.button,
-                            selectedOption === 'newest' && styles.selectedButton,
+                            Styles.button,
+                            selectedOption === 'newest' && Styles.selectedButton,
                         ]}
                         onPress={() => handleOptionChange('newest')}
                     >
-                        <Text style={styles.buttonText}>Newest News</Text>
+                        <Text style={Styles.buttonText}>Newest News</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[
-                            styles.button,
-                            selectedOption === 'latest' && styles.selectedButton,
+                            Styles.button,
+                            selectedOption === 'latest' && Styles.selectedButton,
                         ]}
                         onPress={() => handleOptionChange('latest')}
                     >
-                        <Text style={styles.buttonText}>Latest Photo</Text>
+                        <Text style={Styles.buttonText}>Latest Photo</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </View>
 
-            <View style={{ marginBottom: wp(3) }}>
+            <View>
                 <FlatList
                     data={postList}
                     showsVerticalScrollIndicator={false}
@@ -100,27 +101,4 @@ const FilteredPosts = (props) => {
     )
 }
 export default FilteredPosts;
-
-export const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 20,
-    },
-    button: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        backgroundColor: Assets.ic_secondaryColor,
-        marginHorizontal: 5,
-    },
-    selectedButton: {
-        backgroundColor: Assets.ic_primaryColor,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-});
 
