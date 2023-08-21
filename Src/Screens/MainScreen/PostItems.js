@@ -9,7 +9,6 @@ const PostItems = ({ image, text, location }) => {
     <View style={styles.container}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.overlay}>
-        {/* <Text style={styles.text}>{text}</Text> */}
         <View style={styles.footer}>
           <Text style={styles.location}>{location}</Text>
           <View style={styles.icons}>
@@ -29,7 +28,7 @@ const PostItems = ({ image, text, location }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   image: {
     width: '90%',

@@ -6,7 +6,6 @@ const StatusItem = ({ username, image }) => {
   return (
     <View style={styles.container}>
       <Image source={{uri:image }} style={styles.image} />
-      <Text style={styles.username}>{username}</Text>
     </View>
   );
 };

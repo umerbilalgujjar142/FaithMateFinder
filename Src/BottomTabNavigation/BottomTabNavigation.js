@@ -7,7 +7,8 @@ import FovouritePosts from '../Screens/FavouritePosts/FavouritePosts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import UploadPost from '../Screens/UploadPost/UploadPosts';
+import Feather from 'react-native-vector-icons/Feather';
 
 import Assets from '../Assets/Assets';
 
@@ -51,6 +52,18 @@ function MyTabs() {
                         <Ionicons name="people" color={color} size={26} />
                     ),
                 }} name="GotMatchPeople" component={GotMatchPeople} />
+
+
+            <Tab.Screen activeColor={Assets.ic_primaryColor}
+                inactiveColor={Assets.ic_secondaryColor}
+                barStyle={{ backgroundColor: '#694fad' }}
+                options={{
+                    headerShown: false,
+                    tabBarLabel: 'Posts',
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="upload" color={color} size={26} />
+                    ),
+                }} name="UploadPost" component={UploadPost} />
 
 
 

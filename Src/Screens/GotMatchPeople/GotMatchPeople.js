@@ -47,9 +47,9 @@ const GotMatchPeople = (props) => {
                     <Text style={Styles.InterestText}>Interest</Text>
 
                     <Text style={[Styles.InterestSubText, { marginTop: wp(3) }]}>{`\u2022 Cricket`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Cricket`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Cricket`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Cricket`}</Text>
+                    <Text style={Styles.InterestSubText}>{`\u2022 Football`}</Text>
+                    <Text style={Styles.InterestSubText}>{`\u2022 Badminton`}</Text>
+                    <Text style={Styles.InterestSubText}>{`\u2022 Table Tennis`}</Text>
                 </View>
             </View>
         </View>

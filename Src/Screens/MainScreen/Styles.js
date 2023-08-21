@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   filteredView: {
     flexDirection: 'row',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   BestMatches: {
-    marginTop: wp(5),
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: wp(5)
