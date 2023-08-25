@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(5),
     top: wp(4)
     , color: Assets.ic_Balck,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    width:wp(98)
   },
   BestMatches: {
 

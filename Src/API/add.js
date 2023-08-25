@@ -209,62 +209,118 @@ export const ConfirmPassword = async (userId, password) => {
 // Frontend code for UpdateProfile function
 export const UpdateProfile = async (bio, age, filePath, userId) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
-  
+
     const formData = new FormData();
-  
+
     if (filePath) {
-      const fileName = filePath[0].fileName.split('.');
-      const fileType = filePath[0].type.split('/');
-  
-      formData.append('profileimage', {
-        uri: filePath[0].uri,
-        name: `${fileName[0]}.${fileType[1]}`,
-        type: filePath[0].type,
-      });
+        const fileName = filePath[0].fileName.split('.');
+        const fileType = filePath[0].type.split('/');
+
+        formData.append('profileimage', {
+            uri: filePath[0].uri,
+            name: `${fileName[0]}.${fileType[1]}`,
+            type: filePath[0].type,
+        });
     }
-  
+
     formData.append('bio', bio);
     formData.append('age', age);
     formData.append('userId', userId);
-  
+
     if (!bio || !age) {
-      alert('Please fill all the fields');
+        alert('Please fill all the fields');
     } else {
-      try {
-        const response = await axios.post(
-          'http://192.168.200.190:3000/auth/api/user/profiledata',
-          formData,
-          {
-            headers: {
-              'x-access-token': USERTOKEN,
-              'Content-Type': 'multipart/form-data',
-            },
-          }
-        );
-        return response;
-      } catch (error) {
-        console.log(error);
-      }
+        try {
+            const response = await axios.post(
+                'http://192.168.200.190:3000/auth/api/user/profiledata',
+                formData,
+                {
+                    headers: {
+                        'x-access-token': USERTOKEN,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     }
-  };
-  
+};
 
 
 
-  export const getProfileData = async (id) => {
+
+export const getProfileData = async (id) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-      const response = await axios.get(
-        'http://192.168.200.190:3000/auth/api/user/getprofiledata?userId=' + id ,
-        {
-          headers: {
-            'x-access-token': USERTOKEN,
-          },
-        }
-      );
-      return response;
+        const response = await axios.get(
+            'http://192.168.200.190:3000/auth/api/user/getprofiledata?userId=' + id,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            }
+        );
+        return response;
     } catch (error) {
-      console.log("---", error);
-      throw error; // Rethrow the error to handle it in the calling function (getProfile)
+        console.log("---", error);
+        throw error; // Rethrow the error to handle it in the calling function (getProfile)
     }
-  };
+};
+
+/////////////////////// get all the status of the user  ///////////////////////
+
+export const getAllUsersStatus = async (latitude, longitude) => {
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/user/getStatus?latitude=${longitude}&longitude=${latitude}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error; // Rethrow the error to handle it in the calling function (getProfile)
+    }
+
+}
+
+
+export const UploadMatchPosts = async (userId, paddress, filePath, latitude, longitude) => {
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    const formData = new FormData();
+    if (filePath) {
+        const fileName = filePath[0].fileName.split('.');
+        const fileType = filePath[0].type.split('/');
+        formData.append('Image', fileName[0] + '.' + fileType[1])
+        formData.append('Image', {
+            uri: filePath[0].uri,
+            name: `${fileName[0]}.${fileType[1]}`,
+            type: filePath[0].type,
+        });
+    }
+    formData.append('userId', userId);
+    formData.append('location', paddress);
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
+    try {
+        const response = await axios.post(
+            'http://192.168.200.190:3000/auth/api/bestmatch', formData,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        );
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
