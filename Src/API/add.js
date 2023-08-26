@@ -324,3 +324,20 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
 }
 
 
+///////////////// get the list of the posts //////////////////////
+export const getAlluserPost = async (latitude, longitude,page) => {
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error; // Rethrow the error to handle it in the calling function (getProfile)
+    }
+
+}

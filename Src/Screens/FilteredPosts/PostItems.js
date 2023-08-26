@@ -5,10 +5,10 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Assets from '../../Assets/Assets';
 import Stars from 'react-native-vector-icons/AntDesign'
 
-const PostItems = ({ image, props, location, star }) => {
+const PostItems = ({ image, props, location, star,text }) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image source={{ uri: "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }} style={styles.image} />
       <View style={styles.overlay}>
 
 
@@ -18,6 +18,7 @@ const PostItems = ({ image, props, location, star }) => {
 
 
         <View style={styles.footer}>
+          <Text style={styles.location}>{text}</Text>
           <Text style={styles.location}>{location}</Text>
           <View style={styles.icons}>
             <TouchableOpacity style={styles.iconContainer}>

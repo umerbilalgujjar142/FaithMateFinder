@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Image,
     Text,
-    View, TextInput, FlatList, Pressable, Modal, TouchableOpacity, StyleSheet,Linking,Platform 
+    View, TextInput, FlatList, Pressable, Modal, TouchableOpacity, StyleSheet, Linking, Platform
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
@@ -16,7 +16,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import ImageComponent from '../../GlobalComponent/ImageComponent/ImageComponent'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
-import { getAllUsersStatus } from '../../API/add'
+import { getAllUsersStatus, getAlluserPost } from '../../API/add'
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 
 
@@ -31,7 +31,8 @@ const MainScreen = (props) => {
     const [fullname, setFullname] = useState('')
     const [cameraCords, setcameraCords] = useState('')
     const [getAllStatus, setGetAllStatus] = useState([])
-
+    const [getAllUserPosts, setGetAllUserPosts] = useState([])
+    const [searchText, setSearchText] = useState('')
 
     useEffect(() => {
         (async () => {
@@ -40,31 +41,47 @@ const MainScreen = (props) => {
             setUserid(id)
             setFullname(name)
         })();
-       
+
         callGeolocation();
-       PermissionComponent.requestPermission();
+        PermissionComponent.requestPermission();
     }, []);
 
- 
+
 
 
     const callGeolocation = async () => {
-        Geolocation.getCurrentPosition(info =>{
+        Geolocation.getCurrentPosition(info => {
             const { latitude, longitude } = info.coords;
             setcameraCords(latitude, longitude)
-           GetAllStatus(latitude, longitude)
+            GetAllStatus(latitude, longitude)
+            GetAllUserPosts(latitude, longitude)
         })
-      }
+    }
 
-     
+
 
 
     const GetAllStatus = async (latitude, longitude) => {
         await getAllUsersStatus(latitude, longitude).then((res) => {
-            if(res.status == 200){
+            if (res.status == 200) {
                 setGetAllStatus(res.data.images)
             }
-            else if(res.data.Status == 400){
+            else if (res.data.Status == 400) {
+                alert(res.data.message)
+            }
+        }).catch((error) => {
+            console.log("error", error)
+        })
+    }
+
+    //get list of the posts 
+
+    const GetAllUserPosts = async (latitude, longitude) => {
+        await getAlluserPost(latitude, longitude, page = 1).then((res) => {
+            if (res.status == 200) {
+                setGetAllUserPosts(res.data.matchedUsers)
+            }
+            else if (res.data.Status == 400) {
                 alert(res.data.message)
             }
         }).catch((error) => {
@@ -73,21 +90,6 @@ const MainScreen = (props) => {
 
     }
 
-    const postList = [
-        {
-            id: '1',
-            image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-            text: 'Enjoying a beautiful day at the beach!',
-            location: 'Beach Name, City',
-        },
-        {
-            id: '2',
-            image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-            text: 'Exploring the mountains. Nature is amazing!',
-            location: 'Mountain Range, Country',
-        },
-        // Add more posts here
-    ];
 
     const chooseFile = async (type) => {
 
@@ -145,6 +147,7 @@ const MainScreen = (props) => {
                     style={Styles.input}
                     placeholder="Search"
                     placeholderTextColor="#888"
+                    onChangeText={(text) => setSearchText(text)}
                 />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10, paddingHorizontal: 20 }}>
@@ -154,13 +157,10 @@ const MainScreen = (props) => {
 
 
                 <View style={{ height: wp(25), marginTop: wp(4) }}>
-                    {
-                        console.log("getAllStatus", getAllStatus)
-                    }
                     <FlatList
                         data={getAllStatus}
-                        renderItem={({ item }) => (       
-                            <StatusItem image={item.Image} />   
+                        renderItem={({ item }) => (
+                            <StatusItem image={item.Image} />
                         )}
                         keyExtractor={(item) => item.id}
                         horizontal
@@ -178,17 +178,16 @@ const MainScreen = (props) => {
                 </Pressable>
             </View>
 
-            <View style={{ height: wp(60) }}>
+            <View style={{ flex: 1 }}>
                 <FlatList
-                    data={postList}
+                    data={getAllUserPosts.slice(0, 5).filter(pd => pd.location.toLowerCase().includes(searchText.toLowerCase()))}
                     showsVerticalScrollIndicator={false}
                     onRequestClose={closeModal}
                     renderItem={({ item }) => (
                         <PostItems
-                            image={item.image}
-                            text={item.text}
+                            image={item.Image}
+                            text={item.user.fullname}
                             location={item.location}
-
                         />
                     )}
                     keyExtractor={(item) => item.id}

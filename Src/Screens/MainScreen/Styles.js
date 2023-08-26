@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
     width:wp(98)
   },
   BestMatches: {
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: wp(5)
+    ,marginBottom:wp(4)
   },
   BestMatchText: {
     color: Assets.ic_Balck,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   ViewMale: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: wp(10),
+    marginTop: wp(5),
     paddingHorizontal: wp(3)
   },
   ViewMale1: {

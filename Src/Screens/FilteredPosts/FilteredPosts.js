@@ -1,38 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import {
-    StyleSheet,
+    ActivityIndicator,
     Text,
-    View, TouchableOpacity, ScrollView,FlatList
+    View, TouchableOpacity, ScrollView, FlatList
 } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderComponent';
 import PostItems from './PostItems';
 import Styles from './Styles'
-
+import { getAlluserPost } from '../../API/add'
+import Geolocation from '@react-native-community/geolocation';
+import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const FilteredPosts = (props) => {
 
     const [selectedOption, setSelectedOption] = useState('popular');
+    const [getAllUserPosts, setGetAllUserPosts] = useState([])
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        GetAllUserPosts();
+    }, [page]);
+
 
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
 
-    const postList = [
-        {
-            id: '1',
-            image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-            text: 'Enjoying a beautiful day at the beach!',
-            location: 'Beach Name, City',
-        },
-        {
-            id: '2',
-            image: 'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-            text: 'Exploring the mountains. Nature is amazing!',
-            location: 'Mountain Range, Country',
-        },
-        // Add more posts here
-    ];
+    //get list of the posts 
+
+    const GetAllUserPosts = async (latitude, longitude) => {
+        setLoading(true);
+
+        await getAlluserPost(latitude, longitude, page).then((res) => {
+            if (res.status === 200) {
+                const newData = res.data.matchedUsers;
+                setGetAllUserPosts(prevData => [...prevData, ...newData]);
+            }
+            else if (res.data.Status == 400) {
+                alert(res.data.message)
+            }
+        }).catch((error) => {
+            console.log("error", error)
+        }).finally(() => {
+            setLoading(false);
+          });
+    }
+
+    useEffect(() => {
+        callGeolocation();
+        PermissionComponent.requestPermission();
+    }, []);
+
+    const callGeolocation = async () => {
+        Geolocation.getCurrentPosition(info => {
+            const { latitude, longitude } = info.coords;
+            GetAllUserPosts(latitude, longitude)
+        })
+    }
+
+    const handleEndReached = () => {
+        if (!loading) {
+            setPage(page + 1);
+        }
+    };
 
     return (
         <View style={Styles.container1}>
@@ -73,19 +106,22 @@ const FilteredPosts = (props) => {
                 </ScrollView>
             </View>
 
-            <View>
+            <View style={{ marginTop: wp(35) }}>
                 <FlatList
-                    data={postList}
+                    data={getAllUserPosts}
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         <PostItems
                             image={item.image}
-                            text={item.text}
+                            text={item.user.fullname}
                             location={item.location}
                             props={props}
                         />
                     )}
                     keyExtractor={(item) => item.id}
+                    onEndReached={()=>handleEndReached}
+                    onEndReachedThreshold={0.5}
+                    ListFooterComponent={loading && <ActivityIndicator />}
                 />
 
             </View>
