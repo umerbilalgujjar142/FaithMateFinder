@@ -187,16 +187,18 @@ const MainScreen = (props) => {
                                         image={item.BestMatch.Image}
                                         text={item.fullname}
                                         location={item.BestMatch.location}
-                                        userId={item.BestMatch.userId}
+                                        id={item.BestMatch.id}
                                         props={props}
+                                        cameraCords={cameraCords}
                                     />
                                      :
                                     <PostItems
                                         image={item.Image}
                                         text={item.user.fullname}
                                         location={item.location}
-                                        userId={item.userId}
+                                        id={item.id}
                                         props={props}
+                                        cameraCords={cameraCords}
 
                                     />
                             }

@@ -13,10 +13,10 @@ import { YouHaveGotMatch } from '../../API/add'
 const GotMatchPeople = (props) => {
 
     const [getMatchData, setGetMatchData] = useState('')
-    const [userId, setUserId] = useState(props.route.params.userId)
-    console.log("userId", userId);
+    const [id, setID] = useState(props.route.params.id)
+    const [cameraCords, setCameraCords] = useState(props.route.params.cameraCords)
     useEffect(() => {
-        YouHaveGotMatch(userId).then((res) => {
+        YouHaveGotMatch(id,cameraCords.longitude,cameraCords.latitude).then((res) => {
             if (res.status == 200) {
                 setGetMatchData(res.data)
             }
@@ -41,7 +41,7 @@ const GotMatchPeople = (props) => {
                     style={Styles.imageBgView}
                 >
                     <View style={Styles.viewBg}>
-                        <Text style={Styles.distanceView}>1.5 km</Text>
+                        <Text style={Styles.distanceView}>{getMatchData.distance} km</Text>
                     </View>
                 </ImageBackground>
 

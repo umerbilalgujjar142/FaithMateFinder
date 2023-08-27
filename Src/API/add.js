@@ -357,11 +357,11 @@ export const getFilteredPosts = async(gender, distance, city, latitude, longitud
     }
 }
 
-export const YouHaveGotMatch = async (userId) => {
+export const YouHaveGotMatch = async (id,longitude,latitude) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getSingleBest?userId=${userId}`,
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
