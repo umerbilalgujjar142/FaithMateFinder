@@ -372,5 +372,77 @@ export const YouHaveGotMatch = async (id,longitude,latitude) => {
         console.log("---", error);
         throw error; 
     }
-
 }
+
+
+export const UpdateLikedStatus = async (id, liked) => {
+    console.log("id", id, "liked", liked);
+    
+        const USERTOKEN = await AsyncStorage.getItem('token');
+        try {
+            const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+            return response;
+        } catch (error) {
+            console.log("---", error);
+            throw error; 
+        }
+    }
+
+
+export const UpdateFavouriteStatus = async (id, favourite) => {
+    console.log("id", id, "favourite", favourite);
+        const USERTOKEN = await AsyncStorage.getItem('token');
+        try {
+            const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+            return response;
+        } catch (error) {
+            console.log("---", error);
+            throw error; 
+        }
+    }
+
+
+    export const getBasedOnLiked = async (userId, page) => {
+    
+        const USERTOKEN = await AsyncStorage.getItem('token');
+        try {
+            const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+            return response;
+        } catch (error) {
+            console.log("---", error);
+            throw error; 
+        }
+    }
+
+    export const getBasedOnFavourite = async (userId, page) => {
+        
+            const USERTOKEN = await AsyncStorage.getItem('token');
+            try {
+                const response = await axios.get(`http://192.168.200.190:3000/auth/api/getFavouriteStatus?userId=${userId}&page=${page}`,
+                {
+                    headers: {
+                        'x-access-token': USERTOKEN,
+                    },
+                })
+                return response;
+            } catch (error) {
+                console.log("---", error);
+                throw error; 
+            }
+        }
+

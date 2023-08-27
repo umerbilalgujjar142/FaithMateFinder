@@ -30,13 +30,11 @@ const PostItems = ({ image, props, location, star,text }) => {
               <Ionicons name="chatbubble" size={24} color={Assets.ic_primaryColor} />
             </TouchableOpacity>
 
-            {
-              star &&
                 <TouchableOpacity style={styles.iconContainer}>
                   <Stars name="star" size={24} color={Assets.ic_primaryColor} />
                 </TouchableOpacity>
+
                 
-            }
           </View>
         </View>
       </View>
