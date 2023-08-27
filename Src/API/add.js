@@ -265,7 +265,7 @@ export const getProfileData = async (id) => {
         return response;
     } catch (error) {
         console.log("---", error);
-        throw error; // Rethrow the error to handle it in the calling function (getProfile)
+        throw error; 
     }
 };
 
@@ -325,7 +325,7 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
 
 
 ///////////////// get the list of the posts //////////////////////
-export const getAlluserPost = async (latitude, longitude,page) => {
+export const getAlluserPost = async (latitude, longitude, page) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
         const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}`,
@@ -338,6 +338,39 @@ export const getAlluserPost = async (latitude, longitude,page) => {
     } catch (error) {
         console.log("---", error);
         throw error; // Rethrow the error to handle it in the calling function (getProfile)
+    }
+}
+
+export const getFilteredPosts = async(gender, distance, city, latitude, longitude) =>{
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error; 
+    }
+}
+
+export const YouHaveGotMatch = async (userId) => {
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getSingleBest?userId=${userId}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error; 
     }
 
 }

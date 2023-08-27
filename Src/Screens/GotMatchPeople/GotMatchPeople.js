@@ -8,8 +8,26 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderComponent';
 import Location from 'react-native-vector-icons/Entypo'
 import Styles from './Styles'
+import { YouHaveGotMatch } from '../../API/add'
 
 const GotMatchPeople = (props) => {
+
+    const [getMatchData, setGetMatchData] = useState('')
+    const [userId, setUserId] = useState(props.route.params.userId)
+    console.log("userId", userId);
+    useEffect(() => {
+        YouHaveGotMatch(userId).then((res) => {
+            if (res.status == 200) {
+                setGetMatchData(res.data)
+            }
+            else if (res.status == 400) {
+                alert(res.data.message)
+            }
+        }).catch((error) => {
+            console.log("error", error)
+        })
+    }, [])
+
 
 
     return (
@@ -29,27 +47,29 @@ const GotMatchPeople = (props) => {
 
 
                 <View style={Styles.ViewName}>
-                    <Text style={Styles.textFreiji}>Freje Jaylani</Text>
-
+                    <Text style={Styles.textFreiji}>{getMatchData?.singleMatch?.user?.fullname}</Text>
                     <Text style={Styles.matchView}>94% Match</Text>
                 </View>
 
 
                 <View style={Styles.LOCATIONvIEW}>
                     <Location name={'location-pin'} size={wp('5.5%')} color={'#000'} />
-                    <Text style={{ color: '#000' }}>new jersy,America</Text>
+                    <Text style={{ color: '#000' }}>{getMatchData?.singleMatch?.location}</Text>
                 </View>
 
                 <View style={{ paddingHorizontal: wp(5) }}>
 
-                    <Text style={Styles.ViewTextTravel}>I am a very simple person who loves to travel and try new things. I would like to meet someone who is easy going and fun loving.</Text>
+                    <Text style={Styles.ViewTextTravel}>{getMatchData?.singleMatch?.user?.profile?.Bio}</Text>
 
                     <Text style={Styles.InterestText}>Interest</Text>
 
-                    <Text style={[Styles.InterestSubText, { marginTop: wp(3) }]}>{`\u2022 Cricket`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Football`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Badminton`}</Text>
-                    <Text style={Styles.InterestSubText}>{`\u2022 Table Tennis`}</Text>
+                    {getMatchData?.singleMatch?.user?.hobby?.fun && (
+                        getMatchData.singleMatch.user.hobby.fun.map((interest, index) => (
+                            <Text key={index} style={Styles.InterestSubText}>
+                                {`\u2022 ${interest.replace(/"/g, '')}`}
+                            </Text>
+                        ))
+                    )}
                 </View>
             </View>
         </View>

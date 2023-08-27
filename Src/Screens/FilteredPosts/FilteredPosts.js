@@ -112,7 +112,7 @@ const FilteredPosts = (props) => {
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         <PostItems
-                            image={item.image}
+                            image={item.Image}
                             text={item.user.fullname}
                             location={item.location}
                             props={props}

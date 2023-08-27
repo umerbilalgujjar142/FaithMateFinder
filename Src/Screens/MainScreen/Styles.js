@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     top: wp(4)
     , color: Assets.ic_Balck,
     fontWeight: 'bold',
-    width:wp(98)
+    width: wp(98)
   },
   BestMatches: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: wp(5)
-    ,marginBottom:wp(4)
+    , marginBottom: wp(4)
   },
   BestMatchText: {
     color: Assets.ic_Balck,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   ViewMale: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: wp(5),
+    marginTop: wp(10),
     paddingHorizontal: wp(3)
   },
   ViewMale1: {
@@ -93,22 +93,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
     , paddingHorizontal: wp(4)
   },
-  modalView1:{
+  modalView1: {
     height: hp(100),
-     justifyContent: 'center',
-      alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
-  modalView2:{
+  modalView2: {
     backgroundColor: 'white',
-     padding: 20,
-     borderRadius: 10,
-     width: '95%'
+    padding: 20,
+    borderRadius: 10,
+    width: '95%'
   },
-  crossStyle:{
+  crossStyle: {
     position: 'absolute',
-     top: wp(3),
-     right: wp(5)
+    top: wp(1.5),
+    right: wp(5)
+  },
+  applyButton: {
+    height: hp(7),
+    width: wp(80),
+    backgroundColor: Assets.ic_primaryColor,
+
+    borderRadius: wp(10),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  aplyText:{
+    color: "#fff", 
+    fontWeight: 'bold', 
+    fontSize: wp(5)
   }
 
 

@@ -8,7 +8,9 @@ import Stars from 'react-native-vector-icons/AntDesign'
 const PostItems = ({ image, props, location, star,text }) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }} style={styles.image} />
+      {/* "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" */}
+   
+      <Image source={{ uri:`https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg`}} resizeMode='contain' style={styles.image} />
       <View style={styles.overlay}>
 
 

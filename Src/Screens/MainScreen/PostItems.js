@@ -4,9 +4,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
 
-const PostItems = ({ image, text, location }) => {
+const PostItems = ({ image, text, location,userId,props }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={()=>props.navigation.navigate("GotMatchPeople",{userId:userId})} style={styles.container}>
       <Image source={{ uri: "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }} style={styles.image} />
       <View style={styles.overlay}>
         <View style={styles.footer}>
@@ -22,7 +22,7 @@ const PostItems = ({ image, text, location }) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

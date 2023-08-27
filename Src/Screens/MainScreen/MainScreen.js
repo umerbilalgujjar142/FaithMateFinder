@@ -25,20 +25,22 @@ const MainScreen = (props) => {
 
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [checkSetData, setCheckSetData] = useState(false)
+    const [getAllFilteredData, setGetAllFilteredData] = useState([])
     const [file, setFile] = useState('')
     const [filePath, setFilePath] = useState({})
-    const [userid, setUserid] = useState('')
     const [fullname, setFullname] = useState('')
-    const [cameraCords, setcameraCords] = useState('')
     const [getAllStatus, setGetAllStatus] = useState([])
     const [getAllUserPosts, setGetAllUserPosts] = useState([])
     const [searchText, setSearchText] = useState('')
+    const [cameraCords, setCameraCords] = useState({
+        latitude: 0,
+        longitude: 0,
+    })
 
     useEffect(() => {
         (async () => {
-            const id = await AsyncStorage.getItem('userid')
             const name = await AsyncStorage.getItem('fullname')
-            setUserid(id)
             setFullname(name)
         })();
 
@@ -52,9 +54,12 @@ const MainScreen = (props) => {
     const callGeolocation = async () => {
         Geolocation.getCurrentPosition(info => {
             const { latitude, longitude } = info.coords;
-            setcameraCords(latitude, longitude)
             GetAllStatus(latitude, longitude)
             GetAllUserPosts(latitude, longitude)
+            setCameraCords({
+                latitude: latitude,
+                longitude: longitude,
+            })
         })
     }
 
@@ -103,17 +108,8 @@ const MainScreen = (props) => {
         let isStoragePermitted = await ImageComponent.requestExternalWritePermission();
         if (isStoragePermitted) {
             launchImageLibrary(options, (response) => {
-                if (response.didCancel) {
-                    console.log('User cancelled camera picker');
-                    return;
-                } else if (response.errorCode == 'camera_unavailable') {
-                    console.log('Camera not available on device');
-                    return;
-                } else if (response.errorCode == 'permission') {
-                    console.log('Permission not satisfied');
-                    return;
-                } else if (response.errorCode == 'others') {
-                    console.log(response.errorMessage);
+                if ((response.didCancel) || (response.errorCode == 'camera_unavailable') || (response.errorCode == 'permission') || (response.errorCode == 'others')) {
+                    console.log('User cancelled  picker');
                     return;
                 }
                 setFilePath(response.assets);
@@ -180,15 +176,31 @@ const MainScreen = (props) => {
 
             <View style={{ flex: 1 }}>
                 <FlatList
-                    data={getAllUserPosts.slice(0, 5).filter(pd => pd.location.toLowerCase().includes(searchText.toLowerCase()))}
+                    data={checkSetData ? getAllFilteredData : getAllUserPosts.slice(0, 5).filter(pd => pd.location.toLowerCase().includes(searchText.toLowerCase()))}
                     showsVerticalScrollIndicator={false}
                     onRequestClose={closeModal}
                     renderItem={({ item }) => (
-                        <PostItems
-                            image={item.Image}
-                            text={item.user.fullname}
-                            location={item.location}
-                        />
+                        <>
+                            {
+                                checkSetData ?     
+                                <PostItems
+                                        image={item.BestMatch.Image}
+                                        text={item.fullname}
+                                        location={item.BestMatch.location}
+                                        userId={item.BestMatch.userId}
+                                        props={props}
+                                    />
+                                     :
+                                    <PostItems
+                                        image={item.Image}
+                                        text={item.user.fullname}
+                                        location={item.location}
+                                        userId={item.userId}
+                                        props={props}
+
+                                    />
+                            }
+                        </>
                     )}
                     keyExtractor={(item) => item.id}
                 />
@@ -202,7 +214,19 @@ const MainScreen = (props) => {
                 onRequestClose={() => {
                     setModalVisible(!modalVisible);
                 }}>
-                <FilteredPosts closeModal={() => setModalVisible(false)} />
+                <FilteredPosts cameraCords={cameraCords} closeModal={() => setModalVisible(false)}
+
+                    onFilterApplied={(wholeData) => {
+                        console.log("Filtered Data:", wholeData);
+                        // setGetAllUserPosts(wholeData)
+                        setGetAllFilteredData(wholeData)
+                    }}
+                    onCheckedData={(data) => {
+                        console.log("Checked Data:", data);
+                        setCheckSetData(data)
+                    }}
+
+                />
             </Modal>
         </View>
     )
