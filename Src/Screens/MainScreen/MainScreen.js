@@ -169,7 +169,7 @@ const MainScreen = (props) => {
             <View style={Styles.BestMatches}>
                 <Text style={Styles.BestMatchText}>Best Matches</Text>
 
-                <Pressable onPress={() => props.navigation.navigate('FilteredPosts')}>
+                <Pressable onPress={() => props.navigation.navigate('SeeAllPosts')}>
                     <Text style={Styles.SeeAll}>See All</Text>
                 </Pressable>
             </View>
@@ -190,6 +190,8 @@ const MainScreen = (props) => {
                                         id={item.BestMatch.id}
                                         props={props}
                                         cameraCords={cameraCords}
+                                        favourites={item.Favourite}
+                                        likes={item.Liked}
                                     />
                                      :
                                     <PostItems
@@ -199,6 +201,8 @@ const MainScreen = (props) => {
                                         id={item.id}
                                         props={props}
                                         cameraCords={cameraCords}
+                                        favourites={item.Favourite}
+                                        likes={item.Liked}
 
                                     />
                             }

@@ -7,11 +7,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import PostItems from './PostItems';
 import Styles from './Styles'
 import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderComponent';
-import { getBasedOnFavourite } from '../../API/add'
+import { getBasedOnLiked } from '../../API/add'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
 
-const FovouritePosts = (props) => {
+const LikedPosts = (props) => {
 
     const [postList, setPostList] = useState([])
     const [page, setPage] = useState(1);
@@ -21,10 +21,11 @@ const FovouritePosts = (props) => {
     })
 
     useEffect(() => {
+        callGeolocation();
         (async () => {
             const userid = await AsyncStorage.getItem('userid')
-            getBasedOnFavourite(userid, page).then((res) => {
-                setPostList(res.data.FavouriteUser)
+            getBasedOnLiked(userid, page).then((res) => {
+                setPostList(res.data.LikedUser)
             }).catch((err) => {
                 console.log("err", err)
             })
@@ -32,14 +33,16 @@ const FovouritePosts = (props) => {
        
     }, [])
 
-    Geolocation.getCurrentPosition(info => {
-        const { latitude, longitude } = info.coords;
-        setCameraCords({
-            latitude: latitude,
-            longitude: longitude,
+    const callGeolocation = async () => {
+        
+        Geolocation.getCurrentPosition(info => {
+            const { latitude, longitude } = info.coords;
+            setCameraCords({
+                latitude: latitude,
+                longitude: longitude,
+            })
         })
-    })
-
+    }
 
     return (
         <View style={Styles.container}>
@@ -61,7 +64,7 @@ const FovouritePosts = (props) => {
                             text={item.user.fullname}
                             location={item.location}
                             props={props}
-                            star={item.Favourite}
+                            LikesPost={item.Liked}
                             id={item.id}
                             cameraCords={cameraCords}
                         />
@@ -73,4 +76,4 @@ const FovouritePosts = (props) => {
     )
 
 }
-export default FovouritePosts;
+export default LikedPosts;

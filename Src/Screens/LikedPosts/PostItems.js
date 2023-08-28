@@ -5,14 +5,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Assets from '../../Assets/Assets';
 import Stars from 'react-native-vector-icons/AntDesign'
 
-const PostItems = ({ image, props, location, star,text }) => {
+const PostItems = ({ image, props, location, text, LikesPost,cameraCords,id }) => {
   return (
-    <View style={styles.container}>
-      {/* "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" */}
-   
-      <Image source={{ uri:`https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg`}} resizeMode='contain' style={styles.image} />
-      <View style={styles.overlay}>
+    <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>
 
+      <Image source={{ uri: `https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg` }} resizeMode='contain' style={styles.image} />
+      <View style={styles.overlay}>
 
         <View style={{ textAlign: 'right', alignItems: 'flex-end', top: wp(-30), borderRadius: wp(10) }}>
           <Text style={{ fontSize: wp(4.5), backgroundColor: Assets.ic_primaryColor, padding: wp(1), color: '#fff', borderRadius: wp(1) }}>30% match</Text>
@@ -20,25 +18,26 @@ const PostItems = ({ image, props, location, star,text }) => {
 
 
         <View style={styles.footer}>
-          <Text style={styles.location}>{text}</Text>
+          <Text style={styles.location}>{text},</Text>
           <Text style={styles.location}>{location}</Text>
           <View style={styles.icons}>
-            <TouchableOpacity style={styles.iconContainer}>
-              <Ionicons name="heart" size={24} color={Assets.ic_primaryColor} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconContainer}>
-              <Ionicons name="chatbubble" size={24} color={Assets.ic_primaryColor} />
-            </TouchableOpacity>
-
-                <TouchableOpacity style={styles.iconContainer}>
-                  <Stars name="star" size={24} color={Assets.ic_primaryColor} />
-                </TouchableOpacity>
-
-                
+            {
+              LikesPost ?
+                <>
+                  <View style={styles.iconContainer}>
+                    <Stars name="heart" size={24} color={Assets.ic_primaryColor} />
+                  </View>
+                  <TouchableOpacity style={styles.iconContainer}>
+                    <Ionicons name="chatbubble" size={24} color={Assets.ic_primaryColor} />
+                  </TouchableOpacity>
+                </>
+                :
+                null
+            }
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

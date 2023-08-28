@@ -6,7 +6,7 @@ import Assets from '../../Assets/Assets';
 import Stars from 'react-native-vector-icons/AntDesign'
 import { UpdateLikedStatus, UpdateFavouriteStatus } from '../../API/add'
 
-const PostItems = ({ image, text, location, id, props, cameraCords }) => {
+const PostItems = ({ image, text, location, id, props, cameraCords,likes,favourites }) => {
 
   const [liked, setLiked] = useState(false)
   const [favourite, setFavourite] = useState(false)
@@ -51,15 +51,9 @@ const PostItems = ({ image, text, location, id, props, cameraCords }) => {
     }
   }, [favourite])
 
-
-
-
-
-
-
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>
-      <Image source={{ uri: "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }} style={styles.image} />
+      <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />
       <View style={styles.overlay}>
         <View style={styles.footer}>
           <Text style={styles.location}>{text}</Text>
@@ -67,7 +61,7 @@ const PostItems = ({ image, text, location, id, props, cameraCords }) => {
           <View style={styles.icons}>
 
             {
-              liked ?
+              liked || likes ?
                 <Ionicons name="heart" size={27} color={Assets.ic_primaryColor} /> :
                 <TouchableOpacity onPress={(event) => { event.stopPropagation(); setLiked(true) }} style={styles.iconContainer}>
                   <Ionicons name="heart-outline" size={27} color={Assets.ic_primaryColor} />
@@ -75,11 +69,11 @@ const PostItems = ({ image, text, location, id, props, cameraCords }) => {
 
             }
             <TouchableOpacity onPress={(event) => { event.stopPropagation() }} style={styles.iconContainer}>
-              <Ionicons name="chatbubble-outline" size={27} color={Assets.ic_primaryColor} />
+              <Ionicons name="chatbubble" size={27} color={Assets.ic_primaryColor} />
             </TouchableOpacity>
 
             {
-              favourite ?
+              favourite || favourites ?
                 <Stars name="star" size={27} color={Assets.ic_primaryColor} /> :
                 <TouchableOpacity onPress={(event) => { event.stopPropagation(); setFavourite(true); }} style={styles.iconContainer}>
                   <Stars name="staro" size={27} color={Assets.ic_primaryColor} />

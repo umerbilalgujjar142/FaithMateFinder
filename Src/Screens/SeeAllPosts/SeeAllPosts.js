@@ -12,7 +12,7 @@ import Geolocation from '@react-native-community/geolocation';
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const FilteredPosts = (props) => {
+const SeeAllPosts = (props) => {
 
     const [selectedOption, setSelectedOption] = useState('popular');
     const [getAllUserPosts, setGetAllUserPosts] = useState([])
@@ -69,7 +69,9 @@ const FilteredPosts = (props) => {
 
     return (
         <View style={Styles.container1}>
-            <HeaderComponent headerText={'Filtered Posts'} />
+            <HeaderComponent headerText={'See All Posts'}
+            onPress={() => props.navigation.goBack()}
+            />
 
             <View
                 style={Styles.View1}>
@@ -116,6 +118,8 @@ const FilteredPosts = (props) => {
                             text={item.user.fullname}
                             location={item.location}
                             props={props}
+                            favourites={item.Favourite}
+                            likes={item.Liked}
                         />
                     )}
                     keyExtractor={(item) => item.id}
@@ -136,5 +140,5 @@ const FilteredPosts = (props) => {
         </View>
     )
 }
-export default FilteredPosts;
+export default SeeAllPosts;
 
