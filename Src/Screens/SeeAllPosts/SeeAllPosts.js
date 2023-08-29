@@ -73,42 +73,8 @@ const SeeAllPosts = (props) => {
             onPress={() => props.navigation.goBack()}
             />
 
-            <View
-                style={Styles.View1}>
 
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                    <TouchableOpacity
-                        style={[
-                            Styles.button,
-                            selectedOption === 'popular' && Styles.selectedButton,
-                        ]}
-                        onPress={() => handleOptionChange('popular')}
-                    >
-                        <Text style={Styles.buttonText}>Popular</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={[
-                            Styles.button,
-                            selectedOption === 'newest' && Styles.selectedButton,
-                        ]}
-                        onPress={() => handleOptionChange('newest')}
-                    >
-                        <Text style={Styles.buttonText}>Newest News</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[
-                            Styles.button,
-                            selectedOption === 'latest' && Styles.selectedButton,
-                        ]}
-                        onPress={() => handleOptionChange('latest')}
-                    >
-                        <Text style={Styles.buttonText}>Latest Photo</Text>
-                    </TouchableOpacity>
-                </ScrollView>
-            </View>
-
-            <View style={{ marginTop: wp(35) }}>
+            <View style={{ marginTop: wp(20) }}>
                 <FlatList
                     data={getAllUserPosts}
                     showsVerticalScrollIndicator={false}

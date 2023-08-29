@@ -117,6 +117,7 @@ const FilteredPosts = ({ closeModal,cameraCords,onFilterApplied,onCheckedData  }
                                     <Select.Item label="Canada" value="Canada" />
                                     <Select.Item label="Pakistan" value="Pakistan" />
                                     <Select.Item label="Rawalpindi" value="Rawalpindi" />
+                                    <Select.Item label="Islamabad" value="Islamabad" />
                                 </Select>
                             </NativeBaseProvider>
                         </View>

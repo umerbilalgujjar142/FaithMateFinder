@@ -75,12 +75,15 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     marginBottom: 10,
+   
   },
   image: {
     width: '90%',
     height: 200,
     borderRadius: wp(5), marginTop: wp(1),
-    alignSelf: 'center'
+    alignSelf: 'center',
+    borderWidth:wp(0.1),
+    borderColor:Assets.ic_secondaryColor
   },
   overlay: {
     position: 'absolute',

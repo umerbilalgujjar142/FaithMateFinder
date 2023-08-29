@@ -343,6 +343,7 @@ export const getAlluserPost = async (latitude, longitude, page) => {
 
 export const getFilteredPosts = async(gender, distance, city, latitude, longitude) =>{
     const USERTOKEN = await AsyncStorage.getItem('token');
+  
     try {
         const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
             {

@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
   SeeAll: {
     color: Assets.ic_primaryColor,
     fontWeight: 'bold',
-    fontSize: wp(5)
+    fontSize: wp(5),
+    textDecorationLine: 'underline'
   },
   ViewMale: {
     flexDirection: 'row',
