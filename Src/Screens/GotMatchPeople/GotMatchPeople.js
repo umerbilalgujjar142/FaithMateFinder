@@ -12,11 +12,14 @@ import { YouHaveGotMatch } from '../../API/add'
 
 const GotMatchPeople = (props) => {
 
+    const [storeRandom, setStoreRandom] = React.useState(0);
     const [getMatchData, setGetMatchData] = useState('')
     const [id, setID] = useState(props.route.params.id)
     const [cameraCords, setCameraCords] = useState(props.route.params.cameraCords)
+
+
     useEffect(() => {
-        YouHaveGotMatch(id,cameraCords.longitude,cameraCords.latitude).then((res) => {
+        YouHaveGotMatch(id, cameraCords.longitude, cameraCords.latitude).then((res) => {
             if (res.status == 200) {
                 setGetMatchData(res.data)
             }
@@ -26,7 +29,16 @@ const GotMatchPeople = (props) => {
         }).catch((error) => {
             console.log("error", error)
         })
+
+
+        const randomDecimal = Math.random();
+        const scaledValue = 0.3 + randomDecimal * 0.5;
+        const randomPercentage = scaledValue * 100;
+        const randomPercentageRounded = Math.round(randomPercentage);
+        setStoreRandom(randomPercentageRounded);
+
     }, [])
+
 
 
 
@@ -48,7 +60,7 @@ const GotMatchPeople = (props) => {
 
                 <View style={Styles.ViewName}>
                     <Text style={Styles.textFreiji}>{getMatchData?.singleMatch?.user?.fullname}</Text>
-                    <Text style={Styles.matchView}>94% Match</Text>
+                    <Text style={Styles.matchView}>{storeRandom}% Match</Text>
                 </View>
 
 

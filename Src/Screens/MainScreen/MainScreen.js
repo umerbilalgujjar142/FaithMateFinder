@@ -16,7 +16,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import ImageComponent from '../../GlobalComponent/ImageComponent/ImageComponent'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
-import { getAllUsersStatus, getAlluserPost } from '../../API/add'
+import { getAllUsersStatus, getAlluserPost, UploadStatus } from '../../API/add'
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 
 
@@ -61,6 +61,25 @@ const MainScreen = (props) => {
                 longitude: longitude,
             })
         })
+    }
+
+    const UploadUserStatus = async () => {
+        const userId = await AsyncStorage.getItem('userid')
+        await UploadStatus(filePath,cameraCords.latitude,cameraCords.longitude,userId).then((res) => {
+            if (res.status == 201) {
+                setFile('')
+                setFilePath({})
+                alert("Status Uploaded Successfully")
+                GetAllStatus(cameraCords.latitude, cameraCords.longitude)
+            }
+            else if (res.data.Status == 400) {
+                alert(res.data.message)
+            }
+
+        }).catch((error) => {
+            console.log("error", error)
+        })
+
     }
 
 
@@ -124,6 +143,14 @@ const MainScreen = (props) => {
         setModalVisible(false)
     }
 
+    useEffect(() => {
+        if (file != '') {
+            UploadUserStatus()
+           
+        }
+    }, [file])
+
+
 
     return (
         <View style={Styles.container1}>
@@ -182,8 +209,8 @@ const MainScreen = (props) => {
                     renderItem={({ item }) => (
                         <>
                             {
-                                checkSetData ?     
-                                <PostItems
+                                checkSetData ?
+                                    <PostItems
                                         image={item.BestMatch.Image}
                                         text={item.fullname}
                                         location={item.BestMatch.location}
@@ -193,7 +220,7 @@ const MainScreen = (props) => {
                                         favourites={item.Favourite}
                                         likes={item.Liked}
                                     />
-                                     :
+                                    :
                                     <PostItems
                                         image={item.Image}
                                         text={item.user.fullname}

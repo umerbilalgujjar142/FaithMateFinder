@@ -265,9 +265,48 @@ export const getProfileData = async (id) => {
         return response;
     } catch (error) {
         console.log("---", error);
-        throw error; 
+        throw error;
     }
 };
+
+///////// upload the status of the user ///////////////////////
+export const UploadStatus = async (Image, longitude, latitude, userId) => {
+
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    const formData = new FormData();
+
+    formData.append('longitude', longitude);
+    formData.append('latitude', latitude);
+    formData.append('userId', userId);
+    if (Image) {
+        const fileName = Image[0].fileName.split('.');
+        const fileType = Image[0].type.split('/');
+        formData.append('Image', fileName[0] + '.' + fileType[1])
+        formData.append('Image', {
+            uri: Image[0].uri,
+            name: `${fileName[0]}.${fileType[1]}`,
+            type: Image[0].type,
+        });
+    }
+    
+    
+    try {
+        const response = await axios.post(`http://192.168.200.190:3000/auth/api/user/uploadStatus`,
+            formData,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        );
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 /////////////////////// get all the status of the user  ///////////////////////
 
@@ -341,9 +380,9 @@ export const getAlluserPost = async (latitude, longitude, page) => {
     }
 }
 
-export const getFilteredPosts = async(gender, distance, city, latitude, longitude) =>{
+export const getFilteredPosts = async (gender, distance, city, latitude, longitude) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
-  
+
     try {
         const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
             {
@@ -354,11 +393,11 @@ export const getFilteredPosts = async(gender, distance, city, latitude, longitud
         return response;
     } catch (error) {
         console.log("---", error);
-        throw error; 
+        throw error;
     }
 }
 
-export const YouHaveGotMatch = async (id,longitude,latitude) => {
+export const YouHaveGotMatch = async (id, longitude, latitude) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
@@ -371,79 +410,79 @@ export const YouHaveGotMatch = async (id,longitude,latitude) => {
         return response;
     } catch (error) {
         console.log("---", error);
-        throw error; 
+        throw error;
     }
 }
 
 
 export const UpdateLikedStatus = async (id, liked) => {
     console.log("id", id, "liked", liked);
-    
-        const USERTOKEN = await AsyncStorage.getItem('token');
-        try {
-            const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
                 },
             })
-            return response;
-        } catch (error) {
-            console.log("---", error);
-            throw error; 
-        }
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error;
     }
+}
 
 
 export const UpdateFavouriteStatus = async (id, favourite) => {
     console.log("id", id, "favourite", favourite);
-        const USERTOKEN = await AsyncStorage.getItem('token');
-        try {
-            const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
                 },
             })
-            return response;
-        } catch (error) {
-            console.log("---", error);
-            throw error; 
-        }
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error;
     }
+}
 
 
-    export const getBasedOnLiked = async (userId, page) => {
-    
-        const USERTOKEN = await AsyncStorage.getItem('token');
-        try {
-            const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
+export const getBasedOnLiked = async (userId, page) => {
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
                 },
             })
-            return response;
-        } catch (error) {
-            console.log("---", error);
-            throw error; 
-        }
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error;
     }
+}
 
-    export const getBasedOnFavourite = async (userId, page) => {
-        
-            const USERTOKEN = await AsyncStorage.getItem('token');
-            try {
-                const response = await axios.get(`http://192.168.200.190:3000/auth/api/getFavouriteStatus?userId=${userId}&page=${page}`,
-                {
-                    headers: {
-                        'x-access-token': USERTOKEN,
-                    },
-                })
-                return response;
-            } catch (error) {
-                console.log("---", error);
-                throw error; 
-            }
-        }
+export const getBasedOnFavourite = async (userId, page) => {
+
+    const USERTOKEN = await AsyncStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getFavouriteStatus?userId=${userId}&page=${page}`,
+            {
+                headers: {
+                    'x-access-token': USERTOKEN,
+                },
+            })
+        return response;
+    } catch (error) {
+        console.log("---", error);
+        throw error;
+    }
+}
 

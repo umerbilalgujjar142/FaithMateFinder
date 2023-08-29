@@ -11,7 +11,6 @@ const PostItems = ({ image, text, location, id, props, cameraCords,likes,favouri
   const [liked, setLiked] = useState(false)
   const [favourite, setFavourite] = useState(false)
 
-
   const UpdateLikedIcons = async () => {
     UpdateLikedStatus(id, liked).then((res) => {
       if (res.data.status == 'success') {

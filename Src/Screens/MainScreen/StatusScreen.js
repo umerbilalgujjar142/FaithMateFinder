@@ -1,21 +1,33 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React,{useState} from 'react';
+import { View,TouchableOpacity ,Modal, Image, StyleSheet } from 'react-native';
 import Assets from '../../Assets/Assets';
 
 const StatusItem = ({ image }) => {
+  
+  const [modalVisible, setModalVisible] = useState(false);
+  const [setImage, setSetImage] = useState('')
 
-  const serverIP = 'http://192.168.200.190:3000';
-  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4ODA0NjA4fQ.Mwlu9I3gLN-SYiaBKWprNtK4ofDUSUInRNj2znkGELo';
-  const imageUrl = `${serverIP}/uploads/${image}`;
-
-  const headers = {
-    'x-access-token': authToken,
-    'Content-Type': 'multipart/form-data',
-  };
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: imageUrl, headers }} style={styles.image} />
-    </View>
+    <>
+    <TouchableOpacity onPress={()=>{setSetImage("https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg");setModalVisible(true)}} style={styles.container}>
+      <Image source={{ uri: `https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg` }} style={styles.image} />
+    </TouchableOpacity>
+      
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        transparent={true}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={{ flex: 1, backgroundColor: 'black' }}>
+          <TouchableOpacity onPress={() => setModalVisible(false)} style={{ flex: 1 }}>
+            <Image source={{ uri: setImage }} style={{ width: '100%', height: '100%' }} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+    </>
   );
 };
 
