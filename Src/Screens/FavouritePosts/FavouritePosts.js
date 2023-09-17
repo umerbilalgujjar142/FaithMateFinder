@@ -10,6 +10,7 @@ import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderCompone
 import { getBasedOnFavourite } from '../../API/add'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
+import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
 
 const FovouritePosts = (props) => {
 
@@ -19,13 +20,17 @@ const FovouritePosts = (props) => {
         latitude: 0,
         longitude: 0,
     })
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         (async () => {
+            setVisible(true)
             const userid = await AsyncStorage.getItem('userid')
             getBasedOnFavourite(userid, page).then((res) => {
+                setVisible(false)
                 setPostList(res.data.FavouriteUser)
             }).catch((err) => {
+                setVisible(false)
                 console.log("err", err)
             })
         })();
@@ -67,8 +72,14 @@ const FovouritePosts = (props) => {
                         />
                     )}
                     keyExtractor={(item) => item.id}
+                    ListEmptyComponent={() => (
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: wp(10) }}>
+                            <Text style={{ fontSize: wp(4),color:'#000' }}>No Favourite Posts</Text>
+                        </View>
+                    )}
                 />
             </View>
+            <Loader visible={visible} />
         </View>
     )
 

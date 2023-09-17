@@ -24,7 +24,7 @@ export const addNewUser = async (fullname, gender, email, password, confirmPassw
         alert("Please enter valid email")
     }
     else {
-        let response = await axios.post('http://192.168.200.190:3000/auth/api/user/register', {
+        let response = await axios.post('http://192.168.0.240:3000/auth/api/user/register', {
             fullname,
             gender,
             email,
@@ -48,7 +48,7 @@ export const loginUser = async (email, password) => {
     }
     else {
         try {
-            let response = await axios.post('http://192.168.200.190:3000/auth/api/user/login', {
+            let response = await axios.post('http://192.168.0.240:3000/auth/api/user/login', {
                 email,
                 password
             })
@@ -72,7 +72,7 @@ export const addPersonality = async (fun, book, food, dress, humor, hobbies, use
     }
 
     else {
-        let response = await axios.post('http://192.168.200.190:3000/auth/api/user/personality', {
+        let response = await axios.post('http://192.168.0.240:3000/auth/api/user/personality', {
             fun,
             book,
             food,
@@ -108,7 +108,7 @@ export const addHobbies = async (selectedItems, selectedItems1, selectedItems2, 
         };
 
         try {
-            const response = await axios.post('http://192.168.200.190:3000/auth/api/user/hobbies', requestData, {
+            const response = await axios.post('http://192.168.0.240:3000/auth/api/user/hobbies', requestData, {
                 headers: {
                     'x-access-token': USERTOKEN,
                     'Content-Type': 'application/json'
@@ -138,7 +138,7 @@ export const ForgotPassword = async (email) => {
     }
     else {
 
-        let response = await axios.get('http://192.168.200.190:3000/auth/api/user/sendemail', {
+        let response = await axios.get('http://192.168.0.240:3000/auth/api/user/sendemail', {
             email
         },
             {
@@ -163,7 +163,7 @@ export const EnterOTP = async (formattedOTP, email) => {
         alert("Please enter OTP")
     }
     else {
-        let response = await axios.get('http://192.168.200.190:3000/auth/api/user/verify-otp', {
+        let response = await axios.get('http://192.168.0.240:3000/auth/api/user/verify-otp', {
             enteredOTP: formattedOTP,
             email
         }, {
@@ -190,7 +190,7 @@ export const ConfirmPassword = async (userId, password) => {
         alert("Password must be 6 characters long")
     } else {
         try {
-            const response = await axios.put('http://192.168.200.190:3000/auth/api/user/updatedPassword', requestData, {
+            const response = await axios.put('http://192.168.0.240:3000/auth/api/user/updatedPassword', requestData, {
                 headers: {
                     'x-access-token': USERTOKEN,
                     'Content-Type': 'application/json'
@@ -232,7 +232,7 @@ export const UpdateProfile = async (bio, age, filePath, userId) => {
     } else {
         try {
             const response = await axios.post(
-                'http://192.168.200.190:3000/auth/api/user/profiledata',
+                'http://192.168.0.240:3000/auth/api/user/profiledata',
                 formData,
                 {
                     headers: {
@@ -255,7 +255,7 @@ export const getProfileData = async (id) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
         const response = await axios.get(
-            'http://192.168.200.190:3000/auth/api/user/getprofiledata?userId=' + id,
+            'http://192.168.0.240:3000/auth/api/user/getprofiledata?userId=' + id,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -292,7 +292,7 @@ export const UploadStatus = async (Image, longitude, latitude, userId) => {
     
     
     try {
-        const response = await axios.post(`http://192.168.200.190:3000/auth/api/user/uploadStatus`,
+        const response = await axios.post(`http://192.168.0.240:3000/auth/api/user/uploadStatus`,
             formData,
             {
                 headers: {
@@ -313,7 +313,7 @@ export const UploadStatus = async (Image, longitude, latitude, userId) => {
 export const getAllUsersStatus = async (latitude, longitude) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/user/getStatus?latitude=${longitude}&longitude=${latitude}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/user/getStatus?latitude=${longitude}&longitude=${latitude}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -348,7 +348,7 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
     formData.append('longitude', longitude);
     try {
         const response = await axios.post(
-            'http://192.168.200.190:3000/auth/api/bestmatch', formData,
+            'http://192.168.0.240:3000/auth/api/bestmatch', formData,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -367,7 +367,7 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
 export const getAlluserPost = async (latitude, longitude, page) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -384,7 +384,7 @@ export const getFilteredPosts = async (gender, distance, city, latitude, longitu
     const USERTOKEN = await AsyncStorage.getItem('token');
 
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -401,7 +401,7 @@ export const YouHaveGotMatch = async (id, longitude, latitude) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -420,7 +420,7 @@ export const UpdateLikedStatus = async (id, liked) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -438,7 +438,7 @@ export const UpdateFavouriteStatus = async (id, favourite) => {
     console.log("id", id, "favourite", favourite);
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -456,7 +456,7 @@ export const getBasedOnLiked = async (userId, page) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -473,7 +473,7 @@ export const getBasedOnFavourite = async (userId, page) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.200.190:3000/auth/api/getFavouriteStatus?userId=${userId}&page=${page}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getFavouriteStatus?userId=${userId}&page=${page}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,

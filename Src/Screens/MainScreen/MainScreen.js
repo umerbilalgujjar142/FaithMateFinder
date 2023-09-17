@@ -18,7 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
 import { getAllUsersStatus, getAlluserPost, UploadStatus } from '../../API/add'
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
-
+import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
 
 
 const MainScreen = (props) => {
@@ -37,6 +37,7 @@ const MainScreen = (props) => {
         latitude: 0,
         longitude: 0,
     })
+    const [visible, setLoading] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -64,9 +65,11 @@ const MainScreen = (props) => {
     }
 
     const UploadUserStatus = async () => {
+        setLoading(true)
         const userId = await AsyncStorage.getItem('userid')
         await UploadStatus(filePath,cameraCords.latitude,cameraCords.longitude,userId).then((res) => {
             if (res.status == 201) {
+                setLoading(false)
                 setFile('')
                 setFilePath({})
                 alert("Status Uploaded Successfully")
@@ -74,6 +77,7 @@ const MainScreen = (props) => {
             }
             else if (res.data.Status == 400) {
                 alert(res.data.message)
+                setLoading(false)
             }
 
         }).catch((error) => {
@@ -101,12 +105,15 @@ const MainScreen = (props) => {
     //get list of the posts 
 
     const GetAllUserPosts = async (latitude, longitude) => {
+        setLoading(true)
         await getAlluserPost(latitude, longitude, page = 1).then((res) => {
             if (res.status == 200) {
                 setGetAllUserPosts(res.data.matchedUsers)
+                setLoading(false)
             }
             else if (res.data.Status == 400) {
                 alert(res.data.message)
+                setLoading(false)
             }
         }).catch((error) => {
             console.log("error", error)
@@ -261,6 +268,7 @@ const MainScreen = (props) => {
 
                 />
             </Modal>
+            <Loader visible={visible} />
         </View>
     )
 

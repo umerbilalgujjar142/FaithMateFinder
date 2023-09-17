@@ -11,30 +11,31 @@ import { getAlluserPost } from '../../API/add'
 import Geolocation from '@react-native-community/geolocation';
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
 
 const SeeAllPosts = (props) => {
 
-    const [selectedOption, setSelectedOption] = useState('popular');
     const [getAllUserPosts, setGetAllUserPosts] = useState([])
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-
+    const [cameraCords, setCameraCords] = useState({
+        latitude: 0,
+        longitude: 0
+    })
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         GetAllUserPosts();
     }, [page]);
 
-
-    const handleOptionChange = (option) => {
-        setSelectedOption(option);
-    };
-
     //get list of the posts 
 
     const GetAllUserPosts = async (latitude, longitude) => {
         setLoading(true);
-
+        setVisible(true)
         await getAlluserPost(latitude, longitude, page).then((res) => {
+        setVisible(false)
+
             if (res.status === 200) {
                 const newData = res.data.matchedUsers;
                 setGetAllUserPosts(prevData => [...prevData, ...newData]);
@@ -44,6 +45,7 @@ const SeeAllPosts = (props) => {
             }
         }).catch((error) => {
             console.log("error", error)
+            setVisible(false)
         }).finally(() => {
             setLoading(false);
           });
@@ -58,6 +60,10 @@ const SeeAllPosts = (props) => {
         Geolocation.getCurrentPosition(info => {
             const { latitude, longitude } = info.coords;
             GetAllUserPosts(latitude, longitude)
+            setCameraCords({
+                latitude: latitude,
+                longitude: longitude
+            })
         })
     }
 
@@ -86,9 +92,12 @@ const SeeAllPosts = (props) => {
                             props={props}
                             favourites={item.Favourite}
                             likes={item.Liked}
+                            id={item.userId}
+                            cameraCords={cameraCords}
+                
                         />
                     )}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => "heloo"+item.id}
                     onEndReached={()=>handleEndReached}
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={loading && <ActivityIndicator />}
@@ -100,7 +109,7 @@ const SeeAllPosts = (props) => {
 
 
 
-
+            <Loader visible={visible} />
 
 
         </View>

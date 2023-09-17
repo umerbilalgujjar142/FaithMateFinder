@@ -10,6 +10,7 @@ import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderCompone
 import { getBasedOnLiked } from '../../API/add'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
+import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
 
 const LikedPosts = (props) => {
 
@@ -19,15 +20,19 @@ const LikedPosts = (props) => {
         latitude: 0,
         longitude: 0,
     })
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         callGeolocation();
         (async () => {
+            setVisible(true)
             const userid = await AsyncStorage.getItem('userid')
             getBasedOnLiked(userid, page).then((res) => {
+                setVisible(false)
                 setPostList(res.data.LikedUser)
             }).catch((err) => {
                 console.log("err", err)
+                setVisible(false)
             })
         })();
        
@@ -70,8 +75,14 @@ const LikedPosts = (props) => {
                         />
                     )}
                     keyExtractor={(item) => item.id}
+                    ListEmptyComponent={() => (
+                        <View style={{ flex: 1, justifyContent: 'center', marginTop:wp(15),alignItems: 'center' }}>
+                            <Text style={{ fontSize: wp(4),color:'#000' }}>No Data Found</Text>
+                        </View>
+                    )}
                 />
             </View>
+            <Loader visible={visible} />
         </View>
     )
 
