@@ -6,7 +6,7 @@ import Assets from '../../Assets/Assets';
 import Stars from 'react-native-vector-icons/AntDesign'
 import { UpdateLikedStatus, UpdateFavouriteStatus } from '../../API/add'
 
-const PostItems = ({ image, text, location, id, props, cameraCords,likes,favourites }) => {
+const PostItems = ({  text, location, id, props, cameraCords,likes,favourites,profession }) => {
 
   const [liked, setLiked] = useState(false)
   const [favourite, setFavourite] = useState(false)
@@ -51,9 +51,11 @@ const PostItems = ({ image, text, location, id, props, cameraCords,likes,favouri
   }, [favourite])
 
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>
-      <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />
+    <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>  
+      <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />      
       <View style={styles.overlay}>
+      <Text style={[styles.location,{marginLeft:wp(5)}]}>{profession}</Text>
+
         <View style={styles.footer}>
           <Text style={styles.location}>{text}</Text>
           <Text style={styles.location}>{location}</Text>
@@ -80,6 +82,8 @@ const PostItems = ({ image, text, location, id, props, cameraCords,likes,favouri
             }
           </View>
         </View>
+       
+
       </View>
     </TouchableOpacity>
   );

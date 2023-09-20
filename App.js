@@ -26,8 +26,8 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}} />
         <Stack.Screen name="MyTabs" component={MyTabs} options={{headerShown:false}} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{headerShown:false}} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown:false}} />
+        <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{headerShown:false}} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown:false}} />
         <Stack.Screen name="ResetPassword" component={ResetPassword} options={{headerShown:false}} />
         <Stack.Screen name="EnterOTP" component={EnterOTP} options={{headerShown:false}} />

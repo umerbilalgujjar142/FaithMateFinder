@@ -2,7 +2,7 @@ import axios from "axios";
 import { API } from "./config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const addNewUser = async (fullname, gender, email, password, confirmPassword) => {
+export const addNewUser = async (fullname, gender, email, password, confirmPassword,profession) => {
 
 
     if (password != confirmPassword) {
@@ -10,10 +10,10 @@ export const addNewUser = async (fullname, gender, email, password, confirmPassw
         return
     }
     else if (password.length < 6) {
-        alert("Password must be 6 character long")
+        alert("Password must be 5 character long")
 
     }
-    else if ((fullname == "") || (gender == "") || (email == "") || (password == "") || (confirmPassword == "")) {
+    else if ((fullname == "") || (gender == "") || (email == "") || (password == "") || (confirmPassword == "") ||(profession=="")) {
         alert("Please fill all the fields")
 
     }
@@ -28,7 +28,8 @@ export const addNewUser = async (fullname, gender, email, password, confirmPassw
             fullname,
             gender,
             email,
-            password
+            password,
+            profession
         })
         return response
     }
@@ -37,14 +38,15 @@ export const addNewUser = async (fullname, gender, email, password, confirmPassw
 //login api
 export const loginUser = async (email, password) => {
 
+    console.log("email", email, "password", password);
     if ((email == "") || (password == "")) {
         alert("Please fill all the fields")
     }
     else if (!email.includes("@")) {
         alert("Please enter valid email")
     }
-    else if (password.length < 6) {
-        alert("Password must be 6 character long")
+    else if (password.length <5) {
+        alert("Password must be 5 character long")
     }
     else {
         try {
@@ -207,7 +209,7 @@ export const ConfirmPassword = async (userId, password) => {
 //update profile
 
 // Frontend code for UpdateProfile function
-export const UpdateProfile = async (bio, age, filePath, userId) => {
+export const UpdateProfile = async (bio, age, filePath, userId,ageRange) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
 
     const formData = new FormData();
@@ -220,12 +222,15 @@ export const UpdateProfile = async (bio, age, filePath, userId) => {
             uri: filePath[0].uri,
             name: `${fileName[0]}.${fileType[1]}`,
             type: filePath[0].type,
+
         });
     }
 
     formData.append('bio', bio);
     formData.append('age', age);
     formData.append('userId', userId);
+    formData.append('AgePrefrences', ageRange);
+
 
     if (!bio || !age) {
         alert('Please fill all the fields');
@@ -364,10 +369,10 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
 
 
 ///////////////// get the list of the posts //////////////////////
-export const getAlluserPost = async (latitude, longitude, page) => {
+export const getAlluserPost = async (latitude, longitude, page,Gender) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}&userGender=${Gender}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -400,6 +405,11 @@ export const getFilteredPosts = async (gender, distance, city, latitude, longitu
 export const YouHaveGotMatch = async (id, longitude, latitude) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
+
+    console.log("------",
+    `http://192.168.0.240:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`
+    );
+
     try {
         const response = await axios.get(`http://192.168.0.240:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`,
             {

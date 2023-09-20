@@ -106,7 +106,8 @@ const MainScreen = (props) => {
 
     const GetAllUserPosts = async (latitude, longitude) => {
         setLoading(true)
-        await getAlluserPost(latitude, longitude, page = 1).then((res) => {
+        const Gender=await AsyncStorage.getItem("gender")
+        await getAlluserPost(latitude, longitude, page = 1,Gender).then((res) => {
             if (res.status == 200) {
                 setGetAllUserPosts(res.data.matchedUsers)
                 setLoading(false)
@@ -162,7 +163,9 @@ const MainScreen = (props) => {
     return (
         <View style={Styles.container1}>
             <View style={Styles.filteredView}>
+                <TouchableOpacity onPress={()=>props.navigation.navigate("Profile")}>
                 <Image source={Assets.ic_ProfileImage} style={Styles.imageStyle} resizeMode='contain' />
+                </TouchableOpacity>
                 <Pressable onPress={() => setModalVisible(true)}>
                     <Filter name="filter" size={wp(10)} color={Assets.ic_primaryColor} />
                 </Pressable>
@@ -226,6 +229,7 @@ const MainScreen = (props) => {
                                         cameraCords={cameraCords}
                                         favourites={item.Favourite}
                                         likes={item.Liked}
+                                        profession={item.user.profession}
                                     />
                                     :
                                     <PostItems
@@ -237,6 +241,8 @@ const MainScreen = (props) => {
                                         cameraCords={cameraCords}
                                         favourites={item.Favourite}
                                         likes={item.Liked}
+                                        profession={item.user.profession}
+
 
                                     />
                             }

@@ -22,6 +22,7 @@ const SignUpScreen = (props) => {
     const [confirmPassword, setConfirmPass] = useState('');
     const [isMalePressed, setIsMalePressed] = useState(false);
     const [isFemalePressed, setIsFemalePressed] = useState(false);
+    const [profession,setProfession]=useState('')
   
 
 
@@ -33,7 +34,7 @@ const SignUpScreen = (props) => {
 
     const RegisterUser = async () => {
         
-        addNewUser(fullname,gender,email,password,confirmPassword).then
+        addNewUser(fullname,gender,email,password,confirmPassword,profession).then
         (response => {
             console.log("response", response.data.status)
             if (response.data.status == "success") {
@@ -167,6 +168,25 @@ const SignUpScreen = (props) => {
                     onChangeText={(text) => setConfirmPass(text)}
                     value={confirmPassword}
                 />
+                <InputComponent
+                    width={wp(90)}
+                    height={hp(7)}
+                    backgroundColor={'#fff'}
+                    borderColor={Assets.ic_primaryColor}
+                    borderRadius={wp(1)}
+                    borderWidth={wp(0.4)}
+                    paddingLeft={wp(5)}
+                    marginTop={wp(3)}
+                    alignSelf={'center'}
+                    placeholder={'Enter Your Profession'}
+                    fontSize={wp(4)}
+                    placeholderTextColor={'#000'}
+                    secureTextEntry={false}
+                    value={Age}
+                    maxLength={2}
+                    onChangeText={(text) => { setProfession(text) }}
+                />
+
 
                 <LinearGradientBtn
                     width={wp(90)}

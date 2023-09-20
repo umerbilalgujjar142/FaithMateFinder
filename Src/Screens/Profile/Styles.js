@@ -17,7 +17,7 @@ profileView: {
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    marginTop: wp(15),
+    marginTop: wp(5),
 },
 
 imageAvatar: {
@@ -28,6 +28,24 @@ imageAvatar: {
     borderWidth: wp(0.5),
     borderColor: Assets.ic_primaryColor,
 },
+prefrences:{
+    fontSize:wp(4),
+    paddingHorizontal:wp(5),
+    color:Assets.ic_Balck
+    ,marginTop:wp(4),
+    fontWeight:'700'
+},
+lastView:{
+    marginTop: wp(5), 
+    paddingHorizontal: wp(5)},
+    innerView:{
+        flexDirection: 'row', 
+        justifyContent: 'space-between'
+    },
+    textMinMax:{
+        fontSize: wp(4),
+         color: '#000'
+    }
 
 })
 export default styles;

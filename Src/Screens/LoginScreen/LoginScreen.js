@@ -31,6 +31,8 @@ const LoginScreen = (props) => {
                     AsyncStorage.setItem('fullname', response.data.user.fullname)
                      props.navigation.navigate('Profile')
                     AsyncStorage.setItem('userid', JSON.stringify(response.data.user.id))
+                    AsyncStorage.setItem('gender', response.data.user.gender)
+
                 }
                 else {
                     alert("User not exist")
