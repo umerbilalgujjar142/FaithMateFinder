@@ -26,6 +26,7 @@ const UploadPosts = (props) => {
     })
     const [userId, setUserid] = useState('')
     const [paddress, setPaddress] = useState('')
+    const [country, setCountry] = useState('')
 
     const chooseFile = async (type) => {
 
@@ -87,12 +88,9 @@ const UploadPosts = (props) => {
             axios.request(options).then(function (response) {
 
                 const template = response.data.results[0].address_components
-
                 const locality = template.find(x => x.types[0] === 'locality').long_name
-                const tehsil = template.find(x => x.types[0] === 'administrative_area_level_3').long_name
-                const district = template.find(x => x.types[0] === 'administrative_area_level_2').long_name
-                const province = template.find(x => x.types[0] === 'administrative_area_level_1').long_name
-                
+                const country = template.find(component => component.types.includes('country')).long_name;
+                setCountry(country)
                 setPaddress(locality)
 
             }).catch(function (error) {
@@ -116,7 +114,7 @@ const UploadPosts = (props) => {
 
     }
     const UploadPost = async () => {
-        const response = await UploadMatchPosts(userId, paddress, filePath, cameraCords.latitude, cameraCords.longitude)
+        const response = await UploadMatchPosts(userId, paddress, filePath, cameraCords.latitude, cameraCords.longitude,country)
         if (response.data.status == 'success') {
             alert("Post Uploaded Successfully");
             props.navigation.navigate('MainScreen')

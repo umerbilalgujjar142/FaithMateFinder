@@ -333,7 +333,7 @@ export const getAllUsersStatus = async (latitude, longitude) => {
 }
 
 
-export const UploadMatchPosts = async (userId, paddress, filePath, latitude, longitude) => {
+export const UploadMatchPosts = async (userId, paddress, filePath, latitude, longitude,country) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     const formData = new FormData();
@@ -351,6 +351,7 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
     formData.append('location', paddress);
     formData.append('latitude', latitude);
     formData.append('longitude', longitude);
+    formData.append('country', country);
     try {
         const response = await axios.post(
             'http://192.168.0.240:3000/auth/api/bestmatch', formData,

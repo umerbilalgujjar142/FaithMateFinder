@@ -52,7 +52,9 @@ const PostItems = ({  text, location, id, props, cameraCords,likes,favourites,pr
 
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>  
+      
       <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />      
+     
       <View style={styles.overlay}>
       <Text style={[styles.location,{marginLeft:wp(5)}]}>{profession}</Text>
 

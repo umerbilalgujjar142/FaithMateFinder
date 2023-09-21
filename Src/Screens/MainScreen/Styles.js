@@ -124,8 +124,15 @@ const styles = StyleSheet.create({
     color: "#fff", 
     fontWeight: 'bold', 
     fontSize: wp(5)
-  }
-
+  },
+  innerView:{
+    flexDirection: 'row', 
+    justifyContent: 'space-between',marginTop: wp(5),
+},
+textMinMax:{
+    fontSize: wp(4),
+     color: '#000'
+}
 
 
 })
