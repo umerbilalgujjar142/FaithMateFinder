@@ -12,6 +12,7 @@ import Geolocation from '@react-native-community/geolocation';
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SeeAllPosts = (props) => {
 
@@ -28,15 +29,18 @@ const SeeAllPosts = (props) => {
         GetAllUserPosts();
     }, [page]);
 
-    //get list of the posts 
+    //get list of the posts `   
 
     const GetAllUserPosts = async (latitude, longitude) => {
         setLoading(true);
         setVisible(true)
-        await getAlluserPost(latitude, longitude, page).then((res) => {
+        const Gender=await AsyncStorage.getItem("gender")
+
+        await getAlluserPost(latitude, longitude, page,Gender).then((res) => {
         setVisible(false)
 
             if (res.status === 200) {
+                console.log("res.data.matchedUsers", res.data.matchedUsers)
                 const newData = res.data.matchedUsers;
                 setGetAllUserPosts(prevData => [...prevData, ...newData]);
             }
@@ -80,7 +84,7 @@ const SeeAllPosts = (props) => {
             />
 
 
-            <View style={{ marginTop: wp(20) }}>
+            <View style={{ marginTop: wp(20),backgroundColor:'#fff' }}>
                 <FlatList
                     data={getAllUserPosts}
                     showsVerticalScrollIndicator={false}
@@ -100,6 +104,13 @@ const SeeAllPosts = (props) => {
                     keyExtractor={(item) => "heloo"+item.id}
                     onEndReached={()=>handleEndReached}
                     onEndReachedThreshold={0.5}
+                    ListEmptyComponent={() => (
+                        <View style={{flex:1}}>
+                            <Text style={Styles.emptyText}>No Posts Found</Text>
+                        </View>
+                    )
+                        
+                    }
                     ListFooterComponent={loading && <ActivityIndicator />}
                 />
 

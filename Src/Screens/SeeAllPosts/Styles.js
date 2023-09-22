@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     container1: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#fff',
     },
     View1: {
@@ -38,7 +38,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: wp(5)
-    }
+    },
+    emptyText: {
+        fontSize: wp(4),
+        alignSelf: 'center',
+        marginTop: wp(10),
+        color: Assets.ic_secondaryColor
+    },
 
 
 })

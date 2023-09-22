@@ -132,7 +132,13 @@ const styles = StyleSheet.create({
 textMinMax:{
     fontSize: wp(4),
      color: '#000'
-}
+},
+emptyText:{
+    fontSize: wp(4),
+     alignSelf: 'center', 
+     marginTop: wp(10), 
+     color: Assets.ic_secondaryColor
+},
 
 
 })

@@ -371,6 +371,7 @@ export const UploadMatchPosts = async (userId, paddress, filePath, latitude, lon
 
 ///////////////// get the list of the posts //////////////////////
 export const getAlluserPost = async (latitude, longitude, page,Gender) => {
+    console.log("----->>>",latitude, longitude, page,Gender);
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
         const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatch?latitude=${latitude}&longitude=${longitude}&page=${page}&userGender=${Gender}`,
@@ -386,11 +387,16 @@ export const getAlluserPost = async (latitude, longitude, page,Gender) => {
     }
 }
 
-export const getFilteredPosts = async (gender, distance, city, latitude, longitude) => {
+export const getFilteredPosts = async (selectedCountry,minAge,maxAge) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
 
+    const requestData = {
+        country: selectedCountry,
+        minAge: minAge,
+        maxAge: maxAge
+    };
     try {
-        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBestMatchFilter?gender=${gender}&distance=${distance}&city=${city}&latitude=${latitude}&longitude=${longitude}`,
+        const response = await axios.post(`http://192.168.0.240:3000/auth/api/getBestMatchFilter`,requestData,
             {
                 headers: {
                     'x-access-token': USERTOKEN,

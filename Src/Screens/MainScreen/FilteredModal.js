@@ -11,28 +11,33 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { CountryList } from './CountryList'
 
 
-const FilteredPosts = ({ closeModal, cameraCords, onFilterApplied, onCheckedData }) => {
+const FilteredPosts = ({ closeModal, onFilterApplied, onCheckedData }) => {
 
-    const [Distance, setDistance] = useState('10');
-    const [City, setCity] = useState('');
     const [ageRange, setAgeRange] = useState([18, 65]);
-
     const [selectedCountry, setSelectedCountry] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+
+
 
     const filteredCountries = CountryList.filter(country =>
         country.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     const GetFilteredPosts = async () => {
-        if ((Distance == '') || (City == '')) {
+        //get the agRange value min and max and store them into another min and max variable
+        const minAge = ageRange[0]
+        const maxAge = ageRange[1]
+
+
+
+        if ((selectedCountry == '') || (minAge == '')||(maxAge == '')) {
             alert("Please fill all fields")
             return
         }
         else {
-            await getFilteredPosts(Distance, City, cameraCords.latitude, cameraCords.longitude).then((res) => {
+            await getFilteredPosts(selectedCountry,minAge,maxAge).then((res) => {
                 if (res.status == 200) {
-                    onFilterApplied(res.data.postsWithinDistance)
+                    onFilterApplied(res.data.filteredProfiles)
                     onCheckedData(true)
                     closeModal()
                 }

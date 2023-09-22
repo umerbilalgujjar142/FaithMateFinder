@@ -109,6 +109,7 @@ const MainScreen = (props) => {
         const Gender=await AsyncStorage.getItem("gender")
         await getAlluserPost(latitude, longitude, page = 1,Gender).then((res) => {
             if (res.status == 200) {
+                console.log("res.data.matchedUsers", res.data.matchedUsers);
                 setGetAllUserPosts(res.data.matchedUsers)
                 setLoading(false)
             }
@@ -218,20 +219,21 @@ const MainScreen = (props) => {
                     onRequestClose={closeModal}
                     renderItem={({ item }) => (
                         <>
+                      
                             {
-                                checkSetData ?
-                                    <PostItems
-                                        image={item.BestMatch.Image}
-                                        text={item.fullname}
-                                        location={item.BestMatch.location}
-                                        id={item.BestMatch.id}
-                                        props={props}
-                                        cameraCords={cameraCords}
-                                        favourites={item.Favourite}
-                                        likes={item.Liked}
-                                        profession={item.user.profession}
-                                    />
-                                    :
+                                // checkSetData ?
+                                //     <PostItems
+                                //         image={item.BestMatch.Image}
+                                //         text={item.fullname}
+                                //         location={item.BestMatch.location}
+                                //         id={item.BestMatch.id}
+                                //         props={props}
+                                //         cameraCords={cameraCords}
+                                //         favourites={item.Favourite}
+                                //         likes={item.Liked}
+                                //         profession={item.user.profession}
+                                //     />
+                                //     :
                                     <PostItems
                                         image={item.Image}
                                         text={item.user.fullname}
@@ -249,6 +251,12 @@ const MainScreen = (props) => {
                         </>
                     )}
                     keyExtractor={(item) => item.id}
+                    ListEmptyComponent={() => (
+                        <View style={{ flex: 1 }}>
+                            <Text style={Styles.emptyText}>No Posts Found</Text>
+                        </View>
+                    )
+                    }
                 />
             </View>
 
