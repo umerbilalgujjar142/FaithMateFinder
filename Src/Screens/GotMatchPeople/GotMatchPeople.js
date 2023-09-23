@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     Text,
-    View,  ImageBackground
+    View, ImageBackground
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import HeaderComponent from '../../GlobalComponent/HeaderComponent/HeaderComponent';
@@ -17,6 +17,7 @@ const GotMatchPeople = (props) => {
     const [id, setID] = useState(props.route.params.id)
     const [cameraCords, setCameraCords] = useState(props.route.params.cameraCords)
     const [visible, setVisible] = useState(false);
+
 
     useEffect(() => {
         setVisible(true)
@@ -78,16 +79,20 @@ const GotMatchPeople = (props) => {
 
                     <Text style={Styles.InterestText}>Interest</Text>
 
-                    {getMatchData?.singleMatch?.user?.hobby?.fun && (
+                    {getMatchData?.singleMatch?.user?.hobby?.fun ? (
                         getMatchData.singleMatch.user.hobby.fun.map((interest, index) => (
                             <Text key={index} style={Styles.InterestSubText}>
                                 {`\u2022 ${interest.replace(/"/g, '')}`}
                             </Text>
                         ))
+                    ) : (
+                        <Text style={Styles.InterestSubText}>
+                            No interest
+                        </Text>
                     )}
                 </View>
             </View>
-            
+
             <Loader visible={visible} />
 
         </View>

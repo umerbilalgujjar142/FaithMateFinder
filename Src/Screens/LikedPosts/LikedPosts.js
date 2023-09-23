@@ -27,7 +27,9 @@ const LikedPosts = (props) => {
         (async () => {
             setVisible(true)
             const userid = await AsyncStorage.getItem('userid')
+            console.log("userid", userid);
             getBasedOnLiked(userid, page).then((res) => {
+                console.log("res", res.data);
                 setVisible(false)
                 setPostList(res.data.LikedUser)
             }).catch((err) => {

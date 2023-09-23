@@ -413,10 +413,6 @@ export const YouHaveGotMatch = async (id, longitude, latitude) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
 
-    console.log("------",
-    `http://192.168.0.240:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`
-    );
-
     try {
         const response = await axios.get(`http://192.168.0.240:3000/auth/api/getSingleBest?id=${id}&currentLng=${longitude}&currentLat=${latitude}`,
             {
@@ -432,12 +428,12 @@ export const YouHaveGotMatch = async (id, longitude, latitude) => {
 }
 
 
-export const UpdateLikedStatus = async (id, liked) => {
-    console.log("id", id, "liked", liked);
-
+export const UpdateLikedStatus = async (id, liked,UserId) => {
+   
     const USERTOKEN = await AsyncStorage.getItem('token');
+    console.log("--->>",`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}&likerId=2`);
     try {
-        const response = await axios.get(`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}`,
+        const response = await axios.post(`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}&likerId=2`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,

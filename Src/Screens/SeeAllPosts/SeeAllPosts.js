@@ -40,7 +40,6 @@ const SeeAllPosts = (props) => {
         setVisible(false)
 
             if (res.status === 200) {
-                console.log("res.data.matchedUsers", res.data.matchedUsers)
                 const newData = res.data.matchedUsers;
                 setGetAllUserPosts(prevData => [...prevData, ...newData]);
             }

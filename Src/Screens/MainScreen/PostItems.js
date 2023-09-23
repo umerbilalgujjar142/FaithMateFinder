@@ -5,14 +5,19 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Assets from '../../Assets/Assets';
 import Stars from 'react-native-vector-icons/AntDesign'
 import { UpdateLikedStatus, UpdateFavouriteStatus } from '../../API/add'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const PostItems = ({  text, location, id, props, cameraCords,likes,favourites,profession }) => {
+
+const PostItems = ({ text, country, id, props, cameraCords, likes, favourites, profession, Age }) => {
 
   const [liked, setLiked] = useState(false)
   const [favourite, setFavourite] = useState(false)
 
   const UpdateLikedIcons = async () => {
-    UpdateLikedStatus(id, liked).then((res) => {
+
+    const UserId=await AsyncStorage.getItem('userid')
+
+    UpdateLikedStatus(id, liked,UserId).then((res) => {
       if (res.data.status == 'success') {
         alert("Liked")
       }
@@ -51,16 +56,20 @@ const PostItems = ({  text, location, id, props, cameraCords,likes,favourites,pr
   }, [favourite])
 
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>  
-      
-      <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />      
-     
+    <TouchableOpacity onPress={() => props.navigation.navigate("GotMatchPeople", { id: id, cameraCords: cameraCords })} style={styles.container}>
+
+      <Image source={{ uri: "https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg" }} style={styles.image} />
+
       <View style={styles.overlay}>
-      <Text style={[styles.location,{marginLeft:wp(5)}]}>{profession}</Text>
+        <Text style={[styles.location, { width: null, marginLeft: wp(5), }]}>{profession}</Text>
 
         <View style={styles.footer}>
           <Text style={styles.location}>{text}</Text>
-          <Text style={styles.location}>{location}</Text>
+
+          {Age && <Text style={styles.location}>{Age}</Text>}
+          {!Age && <Text style={styles.location}>{country}</Text>}
+
+
           <View style={styles.icons}>
 
             {
@@ -84,7 +93,7 @@ const PostItems = ({  text, location, id, props, cameraCords,likes,favourites,pr
             }
           </View>
         </View>
-       
+
 
       </View>
     </TouchableOpacity>
@@ -101,8 +110,8 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: wp(5),
     alignSelf: 'center',
-    borderWidth:wp(0.1),
-    borderColor:Assets.ic_secondaryColor
+    borderWidth: wp(0.1),
+    borderColor: Assets.ic_secondaryColor
   },
   overlay: {
     position: 'absolute',

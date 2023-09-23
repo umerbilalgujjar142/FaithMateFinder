@@ -109,7 +109,6 @@ const MainScreen = (props) => {
         const Gender=await AsyncStorage.getItem("gender")
         await getAlluserPost(latitude, longitude, page = 1,Gender).then((res) => {
             if (res.status == 200) {
-                console.log("res.data.matchedUsers", res.data.matchedUsers);
                 setGetAllUserPosts(res.data.matchedUsers)
                 setLoading(false)
             }
@@ -237,14 +236,14 @@ const MainScreen = (props) => {
                                     <PostItems
                                         image={item.Image}
                                         text={item.user.fullname}
-                                        location={item.location}
+                                        country={item.country}
                                         id={item.id}
                                         props={props}
                                         cameraCords={cameraCords}
                                         favourites={item.Favourite}
                                         likes={item.Liked}
                                         profession={item.user.profession}
-
+                                        Age={item.Age}
 
                                     />
                             }
