@@ -204,8 +204,9 @@ const Profile = (props) => {
                         onValuesChange={handleSliderChange}
                         allowOverlap
                         snapped
-                        minMarkerOverlapDistance={10} // Set a small value to allow overlap
+                        minMarkerOverlapDistance={3} // Set a small value to allow overlap
                         containerStyle={{ height: 40, marginTop: wp(2.5), marginLeft: wp(5) }}
+                        
                     />
                 </View>
             </View>

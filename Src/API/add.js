@@ -431,12 +431,18 @@ export const YouHaveGotMatch = async (id, longitude, latitude) => {
 export const UpdateLikedStatus = async (id, liked,UserId) => {
    
     const USERTOKEN = await AsyncStorage.getItem('token');
-    console.log("--->>",`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}&likerId=2`);
     try {
-        const response = await axios.post(`http://192.168.0.240:3000/auth/api/updateLikeStatus?id=${id}&liked=${liked}&likerId=2`,
+        const ResponseData={
+            id:id,
+            liked:liked,
+            likerId:UserId
+        }
+        const response = await axios.post(`http://192.168.0.240:3000/auth/api/updateLikeStatus`,ResponseData,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
+                    'Content-type': 'application/json'
+
                 },
             })
         return response;
@@ -447,11 +453,16 @@ export const UpdateLikedStatus = async (id, liked,UserId) => {
 }
 
 
-export const UpdateFavouriteStatus = async (id, favourite) => {
-    console.log("id", id, "favourite", favourite);
+export const UpdateFavouriteStatus = async (id, favourite,UserId) => {
     const USERTOKEN = await AsyncStorage.getItem('token');
+
     try {
-        const response = await axios.get(`http://192.168.0.240:3000/auth/api/updateFavouriteStatus?id=${id}&favourite=${favourite}`,
+        const ResponseData={
+            id:id,
+            favourite:favourite,
+            favourerId:UserId
+        }
+        const response = await axios.post(`http://192.168.0.240:3000/auth/api/updateFavouriteStatus`,ResponseData,
             {
                 headers: {
                     'x-access-token': USERTOKEN,
@@ -469,7 +480,7 @@ export const getBasedOnLiked = async (userId, page) => {
 
     const USERTOKEN = await AsyncStorage.getItem('token');
     try {
-        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBasedLikedStatus?userId=${userId}&page=${page}`,
+        const response = await axios.get(`http://192.168.0.240:3000/auth/api/getBasedLikedStatus?userId=${userId}`,
             {
                 headers: {
                     'x-access-token': USERTOKEN,

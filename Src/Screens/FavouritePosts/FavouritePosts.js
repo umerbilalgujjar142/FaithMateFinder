@@ -27,8 +27,9 @@ const FovouritePosts = (props) => {
             setVisible(true)
             const userid = await AsyncStorage.getItem('userid')
             getBasedOnFavourite(userid, page).then((res) => {
+                console.log("res", res.data);
                 setVisible(false)
-                setPostList(res.data.FavouriteUser)
+                setPostList(res.data.FavouritePosts)
             }).catch((err) => {
                 setVisible(false)
                 console.log("err", err)

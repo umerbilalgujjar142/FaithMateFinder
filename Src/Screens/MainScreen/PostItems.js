@@ -31,7 +31,8 @@ const PostItems = ({ text, country, id, props, cameraCords, likes, favourites, p
   }
 
   const UpdateFavouriteIcons = async () => {
-    UpdateFavouriteStatus(id, favourite).then((res) => {
+    const UserId=await AsyncStorage.getItem('userid')
+    UpdateFavouriteStatus(id, favourite,UserId).then((res) => {
       if (res.data.status == 'success') {
         alert("Favourite")
       }

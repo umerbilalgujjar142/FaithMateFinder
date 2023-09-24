@@ -27,11 +27,10 @@ const LikedPosts = (props) => {
         (async () => {
             setVisible(true)
             const userid = await AsyncStorage.getItem('userid')
-            console.log("userid", userid);
-            getBasedOnLiked(userid, page).then((res) => {
-                console.log("res", res.data);
+            getBasedOnLiked(userid).then((res) => {
+                console.log("res---", res.data);
                 setVisible(false)
-                setPostList(res.data.LikedUser)
+                setPostList(res.data.likedUsers)
             }).catch((err) => {
                 console.log("err", err)
                 setVisible(false)
@@ -56,7 +55,7 @@ const LikedPosts = (props) => {
 
             <View style={{ height: hp(7) }}>
                 <HeaderComponent
-                    headerText="Favourite Posts"
+                    headerText="Liked Posts"
                     onPress={() => props.navigation.goBack()}
                 />
             </View>

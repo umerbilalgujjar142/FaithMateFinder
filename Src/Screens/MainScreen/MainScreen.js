@@ -172,7 +172,7 @@ const MainScreen = (props) => {
             </View>
             <Text style={Styles.WelcomeText}>Welcome, {fullname}</Text>
 
-            <Text style={styles.pieceofSoul}>Giving someone a piece of your soul is better than giving a piece of your heart. Because souls are etenal.</Text>
+            <Text style={styles.pieceofSoul}>Finding a deep, meaningful and true connection with a likeminded individual can become a reality.</Text>
 
             <View style={Styles.container}>
                 <Icon name="search" size={25} color={Assets.ic_primaryColor} style={Styles.icon} />
@@ -213,7 +213,7 @@ const MainScreen = (props) => {
 
             <View style={{ flex: 1 }}>
                 <FlatList
-                    data={checkSetData ? getAllFilteredData : getAllUserPosts.slice(0, 5).filter(pd => pd.location.toLowerCase().includes(searchText.toLowerCase()))}
+                    data={checkSetData ? getAllFilteredData : getAllUserPosts.slice(0, 5).filter(pd => pd.country.toLowerCase().includes(searchText.toLowerCase()))}
                     showsVerticalScrollIndicator={false}
                     onRequestClose={closeModal}
                     renderItem={({ item }) => (
