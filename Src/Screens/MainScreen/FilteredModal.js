@@ -35,8 +35,10 @@ const FilteredPosts = ({ closeModal, onFilterApplied, onCheckedData }) => {
             return
         }
         else {
+            console.log("---->>>>>",selectedCountry,minAge,maxAge);
             await getFilteredPosts(selectedCountry,minAge,maxAge).then((res) => {
                 if (res.status == 200) {
+                    console.log("res.data.filteredProfiles", res.data.filteredProfiles);
                     onFilterApplied(res.data.filteredProfiles)
                     onCheckedData(true)
                     closeModal()
@@ -78,7 +80,7 @@ const FilteredPosts = ({ closeModal, onFilterApplied, onCheckedData }) => {
                             onValuesChange={handleSliderChange}
                             allowOverlap
                             snapped
-                            minMarkerOverlapDistance={10} // Set a small value to allow overlap
+                            minMarkerOverlapDistance={3} // Set a small value to allow overlap
                             containerStyle={{ height: 40, marginTop: wp(2.5), marginLeft: wp(5) }}
                         />
                         <NativeBaseProvider>

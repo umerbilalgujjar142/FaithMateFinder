@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/AntDesign';
 import UploadPost from '../Screens/UploadPost/UploadPosts';
 import Feather from 'react-native-vector-icons/Feather';
 import LikedPosts from '../Screens/LikedPosts/LikedPosts';
+import AboutPage from '../Screens/About/About';
 import Assets from '../Assets/Assets';
 
 const Tab = createBottomTabNavigator();
@@ -63,6 +64,18 @@ function MyTabs() {
                         <AntDesign name="staro" color={color} size={26} />
                     ),
                 }} name="FovouritePosts" component={FovouritePosts} />
+
+            <Tab.Screen activeColor={Assets.ic_primaryColor}
+                inactiveColor={Assets.ic_secondaryColor}
+                barStyle={{ backgroundColor: '#694fad' }}
+                options={{
+                    headerShown: false,
+                    tabBarLabel: 'About',
+                    tabBarIcon: ({ color }) => (
+                        <AntDesign name="infocirlceo" color={color} size={26} />
+                    ),
+                }} name="AboutPage" component={AboutPage} />
+
 
 
         </Tab.Navigator>

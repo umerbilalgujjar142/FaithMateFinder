@@ -166,9 +166,9 @@ const MainScreen = (props) => {
                 <TouchableOpacity onPress={()=>props.navigation.navigate("Profile")}>
                 <Image source={Assets.ic_ProfileImage} style={Styles.imageStyle} resizeMode='contain' />
                 </TouchableOpacity>
-                <Pressable onPress={() => setModalVisible(true)}>
+                <TouchableOpacity onPress={() => setModalVisible(true)}>
                     <Filter name="filter" size={wp(10)} color={Assets.ic_primaryColor} />
-                </Pressable>
+                </TouchableOpacity>
             </View>
             <Text style={Styles.WelcomeText}>Welcome, {fullname}</Text>
 

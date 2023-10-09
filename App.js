@@ -15,8 +15,8 @@ import MyTabs from './Src/BottomTabNavigation/BottomTabNavigation';
 import UploadPost from './Src/Screens/UploadPost/UploadPosts'
 import GotMatchPeople from './Src/Screens/GotMatchPeople/GotMatchPeople';
 import SeeAllPosts from './Src/Screens/SeeAllPosts/SeeAllPosts';
-
-
+import AboutPage from './Src/Screens/About/About';
+import Testmonials from './Src/Screens/Testmonials/Testmonials';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -38,6 +38,9 @@ function App() {
         <Stack.Screen name="UploadPost" component={UploadPost} options={{headerShown:false}} /> 
         <Stack.Screen name="GotMatchPeople" component={GotMatchPeople} options={{headerShown:false}} /> 
         <Stack.Screen name="SeeAllPosts" component={SeeAllPosts} options={{headerShown:false}} /> 
+        <Stack.Screen name="AboutPage" component={AboutPage} options={{headerShown:false}} /> 
+        <Stack.Screen name="Testmonials" component={Testmonials} options={{headerShown:false}} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

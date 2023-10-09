@@ -7,7 +7,6 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
 import Styles from './Styles'
-import ButtonComponent from '../../GlobalComponent/ButtonComponent/ButtonComponent';
 import OTPComponent from './OTPComponent';
 
 

@@ -24,8 +24,10 @@ const PostItems = ({ image, props, location, text, LikesPost, cameraCords, id })
           <Text style={styles.matchText}>{storeRandom}% match</Text>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.location}>{text},</Text>
+          <View style={{flexDirection:'row'}}>
+          <Text style={styles.location}>{text},{'   '}</Text>
           <Text style={styles.location}>{location}</Text>
+          </View>
           <View style={styles.icons}>
             {
               LikesPost ?
