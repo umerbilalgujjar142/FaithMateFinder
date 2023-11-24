@@ -17,6 +17,9 @@ import GotMatchPeople from './Src/Screens/GotMatchPeople/GotMatchPeople';
 import SeeAllPosts from './Src/Screens/SeeAllPosts/SeeAllPosts';
 import AboutPage from './Src/Screens/About/About';
 import Testmonials from './Src/Screens/Testmonials/Testmonials';
+import ChatScreen from './Src/Screens/ChatScreen/ChatScreen';
+import Subscription from './Src/Screens/Subscription/Subscription';
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -40,8 +43,8 @@ function App() {
         <Stack.Screen name="SeeAllPosts" component={SeeAllPosts} options={{headerShown:false}} /> 
         <Stack.Screen name="AboutPage" component={AboutPage} options={{headerShown:false}} /> 
         <Stack.Screen name="Testmonials" component={Testmonials} options={{headerShown:false}} />
-
-
+        <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Subscription" component={Subscription} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

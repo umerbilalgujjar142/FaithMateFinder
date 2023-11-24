@@ -129,7 +129,7 @@ const Profile = (props) => {
                 onPress={() => { chooseFile('photo') }}>
                 <TouchableOpacity style={Styles.profileView} onPress={() => chooseFile('photo')}>
                     <Image
-                        // source={file !== "" && file !== null ? { uri: `http://192.168.0.240:3000/uploads/${file}` } : Assets.ic_ProfileImage}
+                        // source={file !== "" && file !== null ? { uri: `http://192.168.8.102:3000/uploads/${file}` } : Assets.ic_ProfileImage}
                         source={Assets.ic_ProfileImage}
 
                         style={Styles.imageAvatar}
