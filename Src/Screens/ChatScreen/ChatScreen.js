@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
-import {GiftedChat, Bubble} from 'react-native-gifted-chat';
+import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import Styles from './Styles';
 import io from 'socket.io-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {postMessage, getMessages} from '../../API/add';
 
+
 const ChatScreen = props => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
-  const [recipientId, setRecipientId] = useState(props.route.params.userId);
+  const [recipientId, setRecipientId] = useState(props?.route?.params?.userId);
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const fetchUserId = async () => {
       const id = await AsyncStorage.getItem('userid');
-      //convert to int
       setUserId(parseInt(id));
     };
     fetchUserId();
@@ -38,7 +38,6 @@ const ChatScreen = props => {
 
   const onSend = async (newMessages = []) => {
     if (socket) {
-      // Send message to the server with recipientId and current userId
       socket.emit('send_message', {
         senderId: userId,
         receiverId: recipientId,
@@ -82,7 +81,6 @@ const ChatScreen = props => {
         formattedMessages.sort(
           (a, b) => a.createdAt.getTime() - b.createdAt.getTime(),
         );
-        
 
         setMessages(formattedMessages.reverse());
       } else {
@@ -113,14 +111,34 @@ const ChatScreen = props => {
             <Bubble
               {...props}
               wrapperStyle={{
-                // Style for sender's messages (right side)
-                right: {backgroundColor: isSentByCurrentUser ? 'red' : 'blue'},
-                // Style for recipient's messages (left side)
-                left: {backgroundColor: isSentByCurrentUser ? 'blue' : 'red'},
+                right: {
+                  backgroundColor: isSentByCurrentUser ? '#FF5E5E' : '#5CACEE',
+                  borderRadius: 15, // Rounded corners for sender's messages
+                },
+                left: {
+                  backgroundColor: isSentByCurrentUser ? '#5CACEE' : '#FF5E5E',
+                  borderRadius: 15, // Rounded corners for recipient's messages
+                },
+              }}
+              textStyle={{
+                right: {
+                  color: '#FFFFFF', // Text color for sender's messages
+                },
+                left: {
+                  color: '#FFFFFF', // Text color for recipient's messages
+                },
               }}
             />
           );
         }}
+        renderSend={props => (
+          <Send
+            {...props}
+            containerStyle={Styles.sendContainer}
+            textStyle={Styles.sendText}
+            label="Send"
+          />
+        )}
       />
     </View>
   );

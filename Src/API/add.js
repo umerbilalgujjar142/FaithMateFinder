@@ -581,7 +581,6 @@ export const getMessages = async (senderId, receiverId) => {
         },
       },
     );
-    console.log('response--->>>', response.data);
     return response;
   } catch (error) {
     console.log(error);
