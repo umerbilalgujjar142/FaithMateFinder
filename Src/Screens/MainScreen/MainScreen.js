@@ -9,8 +9,7 @@ import {
   Modal,
   TouchableOpacity,
   StyleSheet,
-  BackHandler,
-  Alert,
+ SafeAreaView
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -180,7 +179,7 @@ const MainScreen = props => {
   }, [file]);
 
   return (
-    <View style={Styles.container1}>
+    <SafeAreaView style={Styles.container1}>
       <View style={Styles.filteredView}>
         <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
           <Image
@@ -304,7 +303,7 @@ const MainScreen = props => {
               onPress={() => props.navigation.navigate('Subscription')}>
               <View style={{alignItems: 'center', marginVertical: 20}}>
                 <Text style={{fontSize: 16, color: 'blue'}}>
-                  Subscribe for more stories
+                  Subscribe to be more matches
                 </Text>
               </View>
             </TouchableOpacity>
@@ -334,7 +333,7 @@ const MainScreen = props => {
         />
       </Modal>
       <Loader visible={visible} />
-    </View>
+    </SafeAreaView>
   );
 };
 export default MainScreen;

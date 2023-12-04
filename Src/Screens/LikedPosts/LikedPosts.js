@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     Text,
-    View, FlatList,
+    View, FlatList,SafeAreaView
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import PostItems from './PostItems';
@@ -51,7 +51,7 @@ const LikedPosts = (props) => {
     }
 
     return (
-        <View style={Styles.container}>
+        <SafeAreaView style={Styles.container}>
 
             <View style={{ height: hp(7) }}>
                 <HeaderComponent
@@ -84,7 +84,7 @@ const LikedPosts = (props) => {
                 />
             </View>
             <Loader visible={visible} />
-        </View>
+        </SafeAreaView>
     )
 
 }

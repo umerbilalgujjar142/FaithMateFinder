@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
     Image,
     Text,
-    View, TouchableOpacity
+    View, TouchableOpacity,SafeAreaView
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
@@ -128,7 +128,7 @@ const UploadPosts = (props) => {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
             <View style={{ height: hp(7) }}>
                 <HeaderComponent
                     headerText="Upload Post"
@@ -152,7 +152,7 @@ const UploadPosts = (props) => {
                     <Text style={{ color: '#fff', fontSize: wp('4.5%') }}>Upload Post</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
 
     )
 

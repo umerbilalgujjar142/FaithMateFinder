@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ImageBackground,Modal,RadioButton } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, ImageBackground,Modal,RadioButton } from 'react-native';
 import Assets from '../../Assets/Assets';
 import {
   widthPercentageToDP as wp,
@@ -87,7 +87,7 @@ const Subscription = () => {
       source={Assets.ic_bgScreen} // Replace with your background image
       style={styles.backgroundImage}
     >
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Choose a Subscription</Text>
 
         <ScrollView
@@ -135,7 +135,7 @@ const Subscription = () => {
                 <View style={{ marginBottom: wp(5) }}>
                   <Text style={{ fontSize: wp(5), color: '#fff', fontWeight: '500' }}>{'\u2B19'} Chat</Text>
                   <Text style={{ fontSize: wp(5), color: '#fff', fontWeight: '500' }}>{'\u2B19'} Match people</Text>
-                  <Text style={{ fontSize: wp(5), color: '#fff', fontWeight: '500' }}>{`\u2B19 Upto ${updatedProfiles} profiles`}</Text>
+                  <Text style={{ fontSize: wp(5), color: '#fff', fontWeight: '500' }}>{`\u2B19 Up to ${updatedProfiles} profiles`}</Text>
                 </View>
                 <Text style={styles.packageDetails}>Price   {updatedPrice}</Text>
                 <LinearGradientBtn
@@ -171,7 +171,7 @@ const Subscription = () => {
             />
           </View>
         </Modal>
-      </View>
+      </SafeAreaView>
     </ImageBackground>
   );
 };

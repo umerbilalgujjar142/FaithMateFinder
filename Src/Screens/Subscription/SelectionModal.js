@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity,ActivityIndicator, Modal} from 'react-native';
+import {View, Text, TouchableOpacity,ActivityIndicator, Modal,SafeAreaView} from 'react-native';
 import styles from './Styles';
 import PayPalAPI from '../../API/PayPalApi';
 import WebView from 'react-native-webview';
@@ -98,6 +98,7 @@ const SelectionModal = ({
 
 
       <Modal visible={!!paypalUrl}>
+      <SafeAreaView style={{flex:1}}> 
         <TouchableOpacity onPress={clearPaypalState} style={{margin: 24}}>
           <Icon name="close" size={26} color={'red'} />
         </TouchableOpacity>
@@ -107,7 +108,9 @@ const SelectionModal = ({
             onNavigationStateChange={onUrlChange}
           />
         </View>
+        </SafeAreaView>
       </Modal>
+      
     </View>
   );
 };
