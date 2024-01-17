@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: wp(5)
-    , marginBottom: wp(4)
+    , marginBottom: wp(4),marginTop:wp(2)
   },
   BestMatchText: {
     color: Assets.ic_Balck,

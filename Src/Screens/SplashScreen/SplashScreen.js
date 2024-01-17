@@ -6,15 +6,23 @@ import {
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Assets from '../../Assets/Assets';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = (props) => {
 
     useEffect(() => {
-        setTimeout(() => {
-            // props.navigation.navigate('DetailsScreen')
-            props.navigation.navigate('MyTabs')
-        }, 3000);
-    }, [])
+        checkAuthentication();
+      }, []);
+    
+      const checkAuthentication = async () => {
+        const userId = await AsyncStorage.getItem('userid');
+        console.log('userId', userId);
+        if (!userId) {
+          props.navigation.navigate('MyTabs');
+        } else {
+          props.navigation.navigate('LoginScreen');
+        }
+      };
 
 
     return (

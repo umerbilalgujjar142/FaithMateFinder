@@ -6,7 +6,7 @@ const Assets = {
     ic_Profile: require('./Profile.png'),
     ic_ProfileImage: require('./person.png'),
     ic_bgScreen: require('./bg-screen.png'),
-
+    
 
     
 

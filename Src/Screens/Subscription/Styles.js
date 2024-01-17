@@ -134,5 +134,10 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 16,
     },
+    matchPeopleText:{
+      fontSize: wp(5),
+       color: '#fff',
+       fontWeight: '500'
+    }
   });
   export default styles;

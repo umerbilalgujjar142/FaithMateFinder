@@ -26,6 +26,11 @@ const InputComponent = (props) => {
                     color: props.color,
                     fontSize: props.fontSize,
                     textAlignVertical: props.textAlignVertical,
+                    shadowColor: props.shadowColor,
+                    shadowOffset: props.shadowOffset,
+                    shadowOpacity: props.shadowOpacity,
+                    shadowRadius: props.shadowRadius,
+                    elevation: props.elevation,
                     
                 }}
                 placeholder={props.placeholder}

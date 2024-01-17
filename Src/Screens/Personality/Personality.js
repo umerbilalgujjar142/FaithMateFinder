@@ -195,6 +195,7 @@ const Personality = (props) => {
                     alignSelf={'center'}
                     top={wp(5)}
                     onPress={() => { AddPersonality() }}
+                    // onPress={() => { props.navigation.navigate('Hobbies') }}
                 />
             </View>
 

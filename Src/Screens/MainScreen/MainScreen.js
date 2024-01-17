@@ -9,7 +9,7 @@ import {
   Modal,
   TouchableOpacity,
   StyleSheet,
- SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -26,9 +26,15 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import ImageComponent from '../../GlobalComponent/ImageComponent/ImageComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
-import {getAllUsersStatus, getAlluserPost, UploadStatus} from '../../API/add';
+import {
+  getAllUsersStatus,
+  getAlluserPost,
+  UploadStatus,
+  getSubscriptionData,
+} from '../../API/add';
 import PermissionComponent from '../../GlobalComponent/PermissionComponent/PermissionComponent';
 import Loader from '../../GlobalComponent/ActivityIndicator/Loader';
+import TextTicker from 'react-native-text-ticker';
 
 const MainScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,6 +51,8 @@ const MainScreen = props => {
     longitude: 0,
   });
   const [visible, setLoading] = useState(false);
+  const [subStatus, setSubStatus] = useState(false);
+  const [DayDifference, setDayDifference] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -55,15 +63,8 @@ const MainScreen = props => {
     callGeolocation();
     PermissionComponent.requestPermission();
 
-    // const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    //     BackHandler.exitApp();
-    //     return true;
-    //   });
-    //   return () => backHandler.remove();
+    getSubscription();
   }, []);
-
-
-  
 
   const callGeolocation = async () => {
     Geolocation.getCurrentPosition(info => {
@@ -178,6 +179,28 @@ const MainScreen = props => {
     }
   }, [file]);
 
+  const getSubscription = async () => {
+    const userId = await AsyncStorage.getItem('userid');
+    await getSubscriptionData(userId)
+      .then(res => {
+        if (res.data.status == 'success') {
+          setSubStatus(false);
+          const apiDate = new Date(res.data.subscriptions[0].endDate);
+          const currentDate = new Date();
+          const timeDifference = apiDate.getTime() - currentDate.getTime();
+          const daysDifference = Math.floor(
+            timeDifference / (1000 * 60 * 60 * 24),
+          );
+          setDayDifference(daysDifference);
+        } else if (res.data.status == 'failed') {
+          setSubStatus(true);
+        }
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  };
+
   return (
     <SafeAreaView style={Styles.container1}>
       <View style={Styles.filteredView}>
@@ -236,7 +259,19 @@ const MainScreen = props => {
           />
         </View>
       </View>
-
+        {
+          DayDifference > 0 &&
+      <View style={{marginTop: wp(-8), paddingHorizontal: wp(2)}}>
+        <TextTicker
+          style={{fontSize: wp(4), color: Assets.ic_primaryColor}}
+          duration={40000}
+          loop
+          repeatSpacer={50}
+          marqueeDelay={500}>
+          {`Your subscription will expire in ${DayDifference || 0} days. Subscribe to get more matches`}
+        </TextTicker>
+      </View>
+}
       <View style={Styles.BestMatches}>
         <Text style={Styles.BestMatchText}>Best Matches</Text>
 
@@ -274,7 +309,7 @@ const MainScreen = props => {
                 //         profession={item.user.profession}
                 //     />
                 //     :
-               
+
                 <PostItems
                   image={item.Image}
                   text={item.user.fullname}
@@ -288,7 +323,6 @@ const MainScreen = props => {
                   profession={item.user.profession}
                   Age={item.Age}
                 />
-                
               }
             </>
           )}
@@ -298,16 +332,18 @@ const MainScreen = props => {
               <Text style={Styles.emptyText}>No Posts Found</Text>
             </View>
           )}
-          ListFooterComponent={() => (
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('Subscription')}>
-              <View style={{alignItems: 'center', marginVertical: 20}}>
-                <Text style={{fontSize: 16, color: 'blue'}}>
-                  Subscribe to be more matches
-                </Text>
-              </View>
-            </TouchableOpacity>
-          )}
+          ListFooterComponent={() =>
+            subStatus ? (
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('Subscription')}>
+                <View style={{alignItems: 'center', marginVertical: 20}}>
+                  <Text style={{fontSize: 16, color: 'blue'}}>
+                    Subscribe to be more matches
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ) : null
+          }
         />
       </View>
 
@@ -332,7 +368,7 @@ const MainScreen = props => {
           }}
         />
       </Modal>
-      <Loader visible={visible} />
+      {/* <Loader visible={visible} /> */}
     </SafeAreaView>
   );
 };

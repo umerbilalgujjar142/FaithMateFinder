@@ -20,7 +20,7 @@ const ChatScreen = props => {
     };
     fetchUserId();
 
-    const newSocket = io('http://192.168.1.2:3000');
+    const newSocket = io('http://192.168.1.6:3000');
     setSocket(newSocket);
 
     return () => {

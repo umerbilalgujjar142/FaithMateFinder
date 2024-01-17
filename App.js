@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './Src/Screens/SplashScreen/SplashScreen';
@@ -19,16 +19,42 @@ import AboutPage from './Src/Screens/About/About';
 import Testmonials from './Src/Screens/Testmonials/Testmonials';
 import ChatScreen from './Src/Screens/ChatScreen/ChatScreen';
 import Subscription from './Src/Screens/Subscription/Subscription';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Interview from './Src/Screens/Interview/Interview';
+import CommunityGuideLine from './Src/Screens/CommunityGuideLine/CommunityGuideLine';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
 
+  //get token from async storage and set it to state
+  const [userId,setUserId] = useState('');
+
+  useEffect(() => {
+    getUserId()
+  },[])
+
+  
+  const getUserId = async () => {
+    const userId = await AsyncStorage.getItem('userid');  
+    if(userId){
+      setUserId(userId);
+    }
+    else{
+      setUserId('');
+    }
+  }
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}} />
-        <Stack.Screen name="MyTabs" component={MyTabs} options={{headerShown:false}} />
+        {/* <Stack.Screen name="Interview" component={Interview} options={{headerShown:false}} /> */}
+       <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}} />
+
+        {
+          userId ?
+        <Stack.Group>
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown:false}} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{headerShown:false}} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown:false}} />
@@ -38,6 +64,10 @@ function App() {
         <Stack.Screen name="Personality" component={Personality} options={{headerShown:false}} />
         <Stack.Screen name="Hobbies" component={Hobbies} options={{headerShown:false}} />
         <Stack.Screen name="ConfirmPasswords" component={ConfirmPasswords} options={{headerShown:false}} />
+        </Stack.Group>
+          :
+        <Stack.Group>
+        <Stack.Screen name="MyTabs" component={MyTabs} options={{headerShown:false}} />
         <Stack.Screen name="UploadPost" component={UploadPost} options={{headerShown:false}} /> 
         <Stack.Screen name="GotMatchPeople" component={GotMatchPeople} options={{headerShown:false}} /> 
         <Stack.Screen name="SeeAllPosts" component={SeeAllPosts} options={{headerShown:false}} /> 
@@ -45,6 +75,11 @@ function App() {
         <Stack.Screen name="Testmonials" component={Testmonials} options={{headerShown:false}} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown:false}} />
         <Stack.Screen name="Subscription" component={Subscription} options={{headerShown:false}} />
+       <Stack.Screen name="CommunityGuideLine" component={CommunityGuideLine} options={{headerShown:false}} />
+        </Stack.Group>
+        } 
+       
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

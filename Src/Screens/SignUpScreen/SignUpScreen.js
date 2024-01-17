@@ -173,7 +173,7 @@ const SignUpScreen = (props) => {
                     height={hp(7)}
                     backgroundColor={'#fff'}
                     borderColor={Assets.ic_primaryColor}
-                    borderRadius={wp(1)}
+                    borderRadius={wp(5)}
                     borderWidth={wp(0.4)}
                     paddingLeft={wp(5)}
                     marginTop={wp(3)}
@@ -182,7 +182,7 @@ const SignUpScreen = (props) => {
                     fontSize={wp(4)}
                     placeholderTextColor={'#000'}
                     secureTextEntry={false}
-                    value={Age}
+                    value={profession}
                     maxLength={2}
                     onChangeText={(text) => { setProfession(text) }}
                 />
